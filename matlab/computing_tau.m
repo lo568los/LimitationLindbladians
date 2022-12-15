@@ -1,7 +1,7 @@
 %% code for plotting tau vs g(bulk site) for various configurations..
 
 
-fixed_glist = [0.01;0.025;0.05;0.075;0.100;0.200;0.300];
+fixed_glist = logspace(log10(0.2),log10(2),10);
 
 load('thermal_data.mat'); % load the data.
 % This loads the Gamma, H_LS, H_S etc.
@@ -10,10 +10,9 @@ site_loc = 4; %The location of g that we want to change value at.
 
 
 %modify other parameters 
-deltalist(3) = 0.5;
-deltalist(4) = 1.2;
-
-
+%deltalist(3) = 0.4;
+%deltalist(4) = 1.2;
+glist(3) = 0.3;
 
 for index = 1:length(fixed_glist)
     disp(cat(2,'Iteration number :',num2str(index)));
@@ -50,7 +49,7 @@ fontsize(gca,36,"pixels")
 
 
 
-save('./tau_plotting/data_2.mat');
+save('./tau_plotting/data_5.mat');
 
 
 %saveas(gcf,cat(2,'plot',num2str(data_index),'.png'));

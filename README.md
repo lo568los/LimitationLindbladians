@@ -13,4 +13,4 @@ obeying local conservation laws" [arxivlink]. The naming convention in the code 
 4.  **compute_tau**, and **compute_tau_singepoint** : These MATLAB scripts read from .mat files, and compute tau for a modified set of parameters(Section IV of the paper)
 
 
-The rest of the code is self-explanatory, and consists mainly of plotting functions / helper functions.  
+The rest of the code is self-explanatory, and consists mainly of plotting functions / helper functions. **/python/helper_code_qutip.py** is a python file consists of helper functions written using QuTiP. **/matlab/helper_functions** is a folder storing helper functions for MATLAB (this folder must be added to the MATLAB PATH). 
