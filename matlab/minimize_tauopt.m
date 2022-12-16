@@ -78,4 +78,7 @@ end
 
 save("thermal_data")
 
+%gamma_matrix_approx = round(gamma_matrix,5); % round to 5 places after decimal.
+%xlswrite("gamma_matrix.xlx",gamma_matrix_approx);
+
 

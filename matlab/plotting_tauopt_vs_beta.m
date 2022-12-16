@@ -9,7 +9,7 @@ N = NL+NM;
 w0list = zeros(N,1)+1;
 deltalist = zeros(N-1,1)+1;
 glist = zeros(N-1,1)+0.1;
-beta = 1;
+
 
 debugInfo = {};
 solver_status = {};

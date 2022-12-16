@@ -39,4 +39,5 @@ fontsize(gca,45,"pixels")
 legend('location','northwest','Interpreter','latex')
 yline(1e-6,'--','Linewidth',3,'HandleVisibility','off');
 
+%set(gca,'Ytick',logspace(-5,-2,4));
 savefig('plot2.fig')

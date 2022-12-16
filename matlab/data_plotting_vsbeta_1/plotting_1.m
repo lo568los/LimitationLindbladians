@@ -29,8 +29,7 @@ fontsize(gca,45,"pixels")
 legend('location','southwest','Interpreter','latex')
 yline(1e-6,'--','Linewidth',3,'HandleVisibility','off');
 
-set(gca,'Xscale','log')
-set(gca,'Yscale','log')
+set(gca,'Ytick',logspace(-5,-2,4));
 hold off;
 
 savefig('plot1.fig')
