@@ -1,5 +1,7 @@
+%% reads from the .mat file and computes \tau for a single set of modified parameters.
+
 load('thermal_data.mat');
-glist(1) = 0.2;
+glist(1) = 0.2; % modify parameters..
 
 
 

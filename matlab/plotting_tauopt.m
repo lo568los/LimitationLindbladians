@@ -35,8 +35,8 @@ fontsize(gca,36,"pixels")
 
 
 % save both data and fig. 
-save(cat(2,'./data_plotting_3/data_',num2str(NL),'_',num2str(NM),'.mat'));
-savefig( cat(2,'./data_plotting_3/data_',num2str(NL),'_',num2str(NM),'.fig'));
+save(cat(2,'./data_plotting_vsg_1/data_',num2str(NL),'_',num2str(NM),'.mat'));
+savefig( cat(2,'./data_plotting_vsg_1/data_',num2str(NL),'_',num2str(NM),'.fig'));
 
 %saveas(gcf,cat(2,'plot',num2str(data_index),'.png'));
 
