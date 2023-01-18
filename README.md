@@ -1,5 +1,5 @@
 ## Introduction
-This repository contains code used for writing the paper "Searching Lindbladians that obey local conservation laws and show thermalization" [arxivlink]. The naming convention in the code closely matches the notation used in the paper. For any questions / comments, please feel free to contact me. I will try my best to get back to you. 
+This repository contains code used for writing the paper "Searching Lindbladians that obey local conservation laws and show thermalization" [arxivlink](https://arxiv.org/abs/2301.02146). The naming convention in the code closely matches the notation used in the paper. For any questions / comments, please feel free to contact me. I will try my best to get back to you. 
 
 ## Requirements
 1. Matlab with CVX (http://cvxr.com/cvx/) installed correctly. Mosek solver is preferred.
