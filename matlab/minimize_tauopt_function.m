@@ -1,6 +1,6 @@
 % Funcion that minimized tau for given input parameters.
 
-function [output] = minimize_tauopt_function(NL,NM,w0list,glist,deltalist,beta)
+function [output] = minimize_tauopt_function(NL,NM,w0list,glist,beta)
     
    
     N = NL+NM;
@@ -10,7 +10,7 @@ function [output] = minimize_tauopt_function(NL,NM,w0list,glist,deltalist,beta)
     
     
     
-    H_S = create_hamiltonian(w0list,glist,deltalist,N);
+    H_S = create_hamiltonian2(w0list,glist,N);
     
     
     [V,~] = eig(H_S);
@@ -68,6 +68,7 @@ function [output] = minimize_tauopt_function(NL,NM,w0list,glist,deltalist,beta)
     output.diag_values = diag_values;
     output.H_LS = H_LS;
     output.cvx_status = cvx_status;
+    output.F = F;
 
     return
 end

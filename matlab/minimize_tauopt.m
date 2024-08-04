@@ -14,12 +14,12 @@ d = dL*dM;
 
 w0list = zeros(N,1) + 1;
 glist = zeros(N-1,1)+0.1;
-deltalist = zeros(N-1,1) +1;
+%deltalist = zeros(N-1,1) +1;
 beta =1;
 
 
 % create_hamiltonian
-H_S = create_hamiltonian(w0list,glist,deltalist,N);
+H_S = create_hamiltonian2(w0list,glist,N);
 
 
 
@@ -76,7 +76,7 @@ for i = 1:d
     diag_values(i) = V(:,i)'*create_L2(rho_th,H_S,H_LS,gamma_matrix,F,NL,NM)*V(:,i);
 end
 
-save("thermal_data")
+save("thermal_data1")
 
 %gamma_matrix_approx = round(gamma_matrix,5); % round to 5 places after decimal.
 %xlswrite("gamma_matrix.xlx",gamma_matrix_approx); % can be used to

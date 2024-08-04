@@ -96,6 +96,54 @@ def create_sigmaz(N,pos):
 
     return op
 
+def create_projector0(N,pos):
+    if pos==1:
+        op=fock_dm(2,0)
+        for k in range(2,N+1):
+            op=tensor(op,qeye(2))
+
+    else:
+        op=qeye(2)
+        for k in range(2,N+1):
+            if k==pos:
+                op=tensor(op,fock_dm(2,0))
+            else:
+                op=tensor(op,qeye(2))
+
+    return op
+
+def create_projector1(N,pos):
+    if pos==1:
+        op=fock_dm(2,1)
+        for k in range(2,N+1):
+            op=tensor(op,qeye(2))
+
+    else:
+        op=qeye(2)
+        for k in range(2,N+1):
+            if k==pos:
+                op=tensor(op,fock_dm(2,1))
+            else:
+                op=tensor(op,qeye(2))
+
+    return op
+
+def create_projector01(N,pos):
+    if pos==1:
+        op=tensor(fock(2,0),fock(2,1))*(tensor(fock(2,1),fock(2,0)).dag())
+        for k in range(2,N):
+            op=tensor(op,qeye(2))
+
+    else:
+        op=qeye(2)
+        for k in range(2,N):
+            if k==pos:
+                op=tensor(op,tensor(fock(2,0),fock(2,1))*(tensor(fock(2,1),fock(2,0)).dag()))
+            else:
+                op=tensor(op,qeye(2))
+
+    return op
+
 
 
 def create_hamiltonian(w0list,glist,delta,N):
@@ -104,6 +152,15 @@ def create_hamiltonian(w0list,glist,delta,N):
 
     for k in range(1,N):
         H=H+(w0list[k-1]/2)*create_sigmaz(N,k) - glist[k-1]*(create_sigmax(N,k)*create_sigmax(N,k+1) + create_sigmay(N,k)*create_sigmay(N,k+1) + delta*create_sigmaz(N,k)*create_sigmaz(N,k+1))
+
+    return H
+
+def create_hamiltonian2(w0list,glist,N):
+    
+    H=(w0list[N-1])*create_projector0(N,N)
+
+    for k in range(1,N):
+        H=H+(w0list[k-1])*create_projector0(N,k) + glist[k-1]*(create_projector01(N,k) + create_projector01(N,k).dag())
 
     return H
 
