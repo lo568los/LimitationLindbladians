@@ -8,7 +8,7 @@ end
 
 
 NL = 2;
-NM = 4;
+NM = 2;
 N = NL+NM;
 
 w0list = zeros(N,1)+1;
@@ -43,8 +43,8 @@ fontsize(gca,36,"pixels")
 
 
 % save both data and fig. 
-save(cat(2,'./data_plotting_vsbeta_1/data_',num2str(NL),'_',num2str(NM),'_3.mat'));
-savefig( cat(2,'./data_plotting_vsbeta_1/data_',num2str(NL),'_',num2str(NM),'_3.fig'));
+save(cat(2,'./data_plotting_vsbeta_1/data_',num2str(NL),'_',num2str(NM),'_5.mat'));
+savefig( cat(2,'./data_plotting_vsbeta_1/data_',num2str(NL),'_',num2str(NM),'_5.fig'));
 
 %saveas(gcf,cat(2,'plot',num2str(data_index),'.png'));
 

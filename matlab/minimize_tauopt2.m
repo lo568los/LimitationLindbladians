@@ -3,7 +3,7 @@
 
 %decide paramteres.
 
-NL = 2; % has to be atleast 1
+NL = 3; % has to be atleast 1
 NM = 4; % has to be atleast 1
 N = NL+NM;
 
@@ -13,7 +13,7 @@ d = dL*dM;
 
 
 w0list = zeros(N,1) + 1;
-glist = zeros(N-1,1)+0.1;
+glist = zeros(N-1,1)+0.0016;
 %deltalist = zeros(N-1,1) +1;
 beta =1/0.422;
 
