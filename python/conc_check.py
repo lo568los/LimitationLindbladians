@@ -97,7 +97,7 @@ def lamb_integrand(omega,E1,E2,alpha,beta,gamma1,gamma2,beta1,beta2,mu1,mu2,tb,f
             return term
         
 Tc_list = [0.001,0.18,0.20]
-Th_list = [0.4,0.7,1.0,1.5,2.0] #formulating the geraldine version
+Th_list = [0.4,0.7,1.0,1.5,2.0]
 
 
 betalist1 = [1/Tc for Tc in Tc_list]
@@ -109,20 +109,21 @@ print(len(betalist1),len(betalist2))
 
 redfield_ss = []
 lle_ss = []
-g = 0
+g = 1.6e-3
 for beta2 in betalist2:
     list_red = []
     list_lle = []
     for e in elist:
         limit_value=700
         b=50
-        N=2 #hot and cold
-        w0min=1 #keep this fixed
+        N=2
+        w0min=1
         w0max=w0min+e
         delta=1
         gmin=1.6e-3
         gmax=1.6e-3
-        beta1 = 1/0.1   #Tc = 0.1
+        beta1 = 1/0.1  #Tc = 0.1
+            
         w0list=np.linspace(w0min,w0max,N)
         glist=np.linspace(gmin,gmax,N-1)
 
@@ -131,7 +132,7 @@ for beta2 in betalist2:
         tb=0.01
         epsilon=1
         gamma1=1e-3 #gamma1 is the coupling to left bath. It shows up in spectral bath function
-        gamma2=1.1e-2    #gamma2 is the coupling to the right bath.    
+        gamma2=1.1e-2   #gamma2 is the coupling to the right bath.    
             
             
 
@@ -160,7 +161,7 @@ for beta2 in betalist2:
         
         number=len(eigenergies)
         
-        integral11=np.empty((number,number),dtype=np.cdouble) #stores J * N integral for left bath
+        """integral11=np.empty((number,number),dtype=np.cdouble) #stores J * N integral for left bath
         integral12=np.empty((number,number),dtype=np.cdouble) # stores J integral (just to check) for the left bath
         integral21=np.empty((number,number),dtype=np.cdouble) #stores J*N integral for right bath
         integral22=np.empty((number,number),dtype=np.cdouble)
@@ -279,7 +280,7 @@ for beta2 in betalist2:
         list_red.append(ss_redfield)
         #print("List1 length:", len(list_red))
 
-        #print('Redfield steady-state computed for Tc = ',1/beta1,' and Th = ',1/beta2)
+        #print('Redfield steady-state computed for Tc = ',1/beta1,' and Th = ',1/beta2)"""
 
 
         ################## Local lindbald shit #############################
@@ -300,14 +301,18 @@ for beta2 in betalist2:
         
         Cops.append(epsilon*np.sqrt(nbar(w0list[0],beta2,mu) + 1)*create_sm(N,1))
         Cops.append(epsilon*np.sqrt(nbar(w0list[0],beta2,mu))*create_sm(N, 1).dag())
-        Cops.append(epsilon*np.sqrt(nbar(w0list[N-1],beta1,mu) + 1)*create_sm(N,N));
+        Cops.append(epsilon*np.sqrt(nbar(w0list[N-1],beta1,mu) + 1)*create_sm(N,N))
         Cops.append(epsilon*np.sqrt(nbar(w0list[N-1],beta1,mu))*create_sm(N,N).dag())
         
         
         #print('Local-Lindblad Liouvillian constructed, Computing steady-state ..')
-        ss_lindblad=steadystate(H,Cops,return_info=return_info)
+        ss_lindblad=steadystate(H,Cops,return_info=return_info)  #Seems to be a problem with this...
+
+       
 
         list_lle.append(ss_lindblad)
+        
+    
         #print("List2 length:", len(list_lle))
 
         #print('Local-Lindblad steady-state computed for Tc = ',1/beta1,' and Th = ',1/beta2)
@@ -316,7 +321,7 @@ for beta2 in betalist2:
     #print("List1 length:", len(list_red))
     #print("List1: ",list_red)
 
-    redfield_ss.append(list_red)
+    #redfield_ss.append(list_red)
     lle_ss.append(list_lle)
 
 #print('All steady-states computed!')
@@ -378,7 +383,7 @@ def heat_current(Th_list,Tc_list,reduced_dm_list):
             rho_c = ss.ptrace(0)
             thermal_cold = thermal_c(1.0,Tc_list[i])
 
-            heat_curr = p_c*(fock(2,0).dag()*(rho_c - thermal_cold)*fock(2,0))  #as |0> is the excited state
+            heat_curr = gamma1*(fock(2,0).dag()*(rho_c - thermal_cold)*fock(2,0))  #as |0> is the excited state
 
             heat_curr_list.append(heat_curr.real)
         plt.plot(Th_list,heat_curr_list,label='Tc/E = '+str(Tc_list[i]))
@@ -389,6 +394,22 @@ def heat_current(Th_list,Tc_list,reduced_dm_list):
     plt.legend()
 
     plt.show()
+
+def conc2(Th_list,Tc_list,reduced_dm_list):
+    
+    for i in range(len(Tc_list)):
+        conc_list = []
+        for j in range(len(Th_list)):
+            ss = reduced_dm_list[i][j]
+            a1 = ss[0,0]
+            a4 = ss[3,3]
+            a = np.abs(ss[1,2])
+            val = 2*(a - np.sqrt(a1*a4))
+            conc_list.append(val)
+        print(f'Concurrence 2 for Tc = {Tc_list[i]}: ',conc_list)
+    return conc_list
+
+
 
 print("Current plot for Redfield ")
 heat_current(Th_list,Tc_list,redfield_ss)
@@ -401,7 +422,11 @@ def negativity(rho):
     a4 = rho[3,3]
     c = np.abs(rho[1,2])
     val = 0.5*(np.sqrt(4*c**2 + (a1-a4)**2) - (a1+a4))  #How did it know the function?? Very cool
-    return val
+    if val < 0:
+        return 0
+    else:
+        return val
+
 def negativity_plot(Th_list,elist,reduced_dm_list):
     for i in range(len(Th_list)):
         neg_list = []
@@ -416,8 +441,52 @@ def negativity_plot(Th_list,elist,reduced_dm_list):
 
     plt.show()
 
+#print("Negativity plot for Local Lindblad ")
+#negativity_plot(Th_list,elist,lle_ss)
+
 #print("density matrix for Redfield: ",redfield_ss[0])
-print("density matrix for LLe: ",lle_ss[0])
+#print("density matrix for LLe: ",lle_ss[0])
+
+def check_ss(rho,e):
+    gammah_plus =  gamma1*nbar(w0list[0],beta2,mu)
+    gammah_minus = gamma1*(nbar(w0list[0],beta2,mu)+1)
+    gammac_plus = gamma2*nbar(w0list[N-1],beta1,mu)
+    gammac_minus = gamma2*(nbar(w0list[N-1],beta1,mu)+1)
+
+    Gamma = gammah_plus + gammah_minus + gammac_plus + gammac_minus
+    Gammah = gammah_plus + gammah_minus
+    Gammac = gammac_plus + gammac_minus
+    chi = (4*g**2 + Gammah*Gammac)*Gamma**2 + 4*e**2*Gammah*Gammac
+
+    r1 = (4*g**2*(gammah_plus+gammac_plus)**2 + gammah_plus*gammac_plus*(Gamma**2 + 4*e**2))/chi
+    r2 = (4*g**2*(gammah_minus+gammac_minus)*(gammah_plus+gammac_plus) + gammah_plus*gammac_minus*(Gamma**2 + 4*e**2))/chi
+    r3 = (4*g**2*(gammah_plus+gammac_plus)*(gammah_minus+gammac_minus) + gammah_minus*gammac_plus*(Gamma**2 + 4*e**2))/chi
+    r4 = (4*g**2*(gammah_minus+gammac_minus)**2 + gammah_minus*gammac_minus*(Gamma**2 + 4*e**2))/chi
+
+    c = 2*g*(gammah_plus*gammac_minus - gammah_minus*gammac_plus)*(1j*Gamma - 2*e)/chi
+
+    print("r1: ",r1)
+    print("r2: ",r2)
+    print("r3: ",r3)
+    print("r4: ",r4)
+    print("c: ",c)
+
+    a1 = rho[0,0]
+    a2 = rho[1,1]
+    a3 = rho[2,2]
+    a4 = rho[3,3]
+    a = rho[1,2]
+
+    print("a1: ",a1)
+    print("a2: ",a2)
+    print("a3: ",a3)
+    print("a4: ",a4)
+    print("a: ",a)
+
+
+
+#print("Concurrence 2 values for Local lindblade: ",conc2(Th_list,Tc_list,lle_ss))
+#conc2(Th_list,Tc_list,lle_ss)
 
 
 
