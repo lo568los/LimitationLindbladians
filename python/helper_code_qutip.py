@@ -33,7 +33,7 @@ def create_magnetization(N):
 
 def create_sm(N,pos): #creates the sigma_minus operator for the given position. N>=2
     if pos==1:
-        op=create(2)
+        op=fock(2,1)*fock(2,0).dag()
         for k in range(2,N+1):
             op=tensor(op,qeye(2))
 
@@ -41,7 +41,7 @@ def create_sm(N,pos): #creates the sigma_minus operator for the given position. 
         op=qeye(2)
         for k in range(2,N+1):
             if k==pos:
-                op=tensor(op,create(2))
+                op=tensor(op,fock(2,1)*fock(2,0).dag())
             else:
                 op=tensor(op,qeye(2))
 
