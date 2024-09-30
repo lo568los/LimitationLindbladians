@@ -164,6 +164,15 @@ def create_hamiltonian2(w0list,glist,N):
 
     return H
 
+def create_hamiltonian3(w0list,glist,delta,N):
+    
+    H=(w0list[N-1])*create_projector0(N,N)
+
+    for k in range(1,N):
+        H=H+(w0list[k-1])*create_projector0(N,k) + glist[k-1]*(create_sigmax(N,k)*create_sigmax(N,k+1) + create_sigmay(N,k)*create_sigmay(N,k+1) + delta*create_sigmaz(N,k)*create_sigmaz(N,k+1))
+
+    return H
+
 
 def create_hamiltonian_v2(w0list,glist,deltalist,N): #includes deltalist
     
