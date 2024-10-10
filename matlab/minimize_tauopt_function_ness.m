@@ -1,7 +1,7 @@
 % Code to minimize tau for given parameters. This serves as a numerical
 % check of the possiblity of thermalization..
 
-load("ness_data_NL1 = 2_NL2 = 2_NM = 2_2.mat")
+load("ness_data_NL1 = 2_NL2 = 2_NM = 2_3.mat")
 
 %decide paramteres.
 
@@ -21,7 +21,7 @@ glist = zeros(N-1,1)+ 0.0016;
 
 deltalist = zeros(N-1,1) +1;
 beta1 = 1;
-beta2 = 1;
+beta2 = 0.6;
 
 
 % create_hamiltonian
@@ -99,7 +99,7 @@ for i = 1:d
     diag_values(i) = V(:,i)'*(create_L2(rho_th,H_S,H_LS1,gamma_matrix1,F1,NL1,NM + NL2) + create_L2(rho_th,H_S,H_LS2,gamma_matrix2,F2,NL2,NM + NL1))*V(:,i);
 end
 
-save("thermal_data_new_1")
+save("thermal_data_new_3")
 
 %gamma_matrix_approx = round(gamma_matrix,5); % round to 5 places after decimal.
 %xlswrite("gamma_matrix.xlx",gamma_matrix_approx); % can be used to
