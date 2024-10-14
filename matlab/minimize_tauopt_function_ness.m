@@ -1,12 +1,12 @@
 % Code to minimize tau for given parameters. This serves as a numerical
 % check of the possiblity of thermalization..
 
-load("ness_data_NL1 = 2_NL2 = 2_NM = 2_3.mat")
+load("ness_data_NL1 = 1_NL2 = 1_NM = 2_6.mat")
 
 %decide paramteres.
 
-NL1 = 2; % has to be atleast 1
-NL2 = 2;
+NL1 = 1; % has to be atleast 1
+NL2 = 1;
 NM = 2; % has to be atleast 1
 N = NL1+NL2+NM;
 
@@ -21,7 +21,7 @@ glist = zeros(N-1,1)+ 0.0016;
 
 deltalist = zeros(N-1,1) +1;
 beta1 = 1;
-beta2 = 0.6;
+beta2 = 1;
 
 
 % create_hamiltonian
@@ -70,7 +70,7 @@ end
 
 %% Starting the SDP.
 
-rho_th = dm_ness;  %setting our non-eq setup rho_th
+rho_th = expm(-beta1*H_S) / trace(expm(-beta1*H_S));  %setting our non-eq setup rho_th
 
 cvx_begin sdp 
     cvx_precision high %set CVX precision
@@ -99,7 +99,7 @@ for i = 1:d
     diag_values(i) = V(:,i)'*(create_L2(rho_th,H_S,H_LS1,gamma_matrix1,F1,NL1,NM + NL2) + create_L2(rho_th,H_S,H_LS2,gamma_matrix2,F2,NL2,NM + NL1))*V(:,i);
 end
 
-save("thermal_data_new_3")
+save("thermal_data_new1_th")
 
 %gamma_matrix_approx = round(gamma_matrix,5); % round to 5 places after decimal.
 %xlswrite("gamma_matrix.xlx",gamma_matrix_approx); % can be used to

@@ -3,8 +3,8 @@
 
 %decide paramteres.
 
-NL = 3; % has to be atleast 1
-NM = 4; % has to be atleast 1
+NL = 2; % has to be atleast 1
+NM = 2; % has to be atleast 1
 N = NL+NM;
 
 dL = 2^NL;
