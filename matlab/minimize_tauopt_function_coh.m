@@ -1,27 +1,27 @@
 % Code to minimize tau for given parameters. This serves as a numerical
 % check of the possiblity of thermalization..
 
-load("ness_data_NL1 = 2_NL2 = 2_NM = 2_5.mat")
+load("coh_data_N = 2_1.mat")
 
 %decide paramteres.
 
-NL1 = 2; % has to be atleast 1
-NM = 2; % has to be atleast 1
-NL2 = 2;
-N = NL1+NM+NL2;
+NL = 2; % has to be atleast 1
+NM = 0; % has to be atleast 1
+%NL2 = 2;
+N = NL + NM;
 
-dL1 = 2^NL1;
-dL2 = 2^NL2;
+dL = 2^NL;
+%dL2 = 2^NL2;
 dM = 2^NM;
-d = dL1*dL2*dM;
+d = 2^N;
 
 
 w0list = zeros(N,1) + 1;
 glist = zeros(N-1,1)+ 0.0016;
 
 deltalist = zeros(N-1,1) +1;
-beta1 = 1;
-beta2 = 1;
+beta = 1;
+%beta2 = 1;
 
 
 % create_hamiltonian
@@ -35,37 +35,37 @@ H_S = create_hamiltonian(w0list,glist,deltalist,N);
 [temp,ind] = sort(diag(D_unsorted));
 V = V_unsorted(:,ind);
 
-F1 = generate_orthonormal_basis(NL1);
-F2 = generate_orthonormal_basis(NL2);
+F1 = generate_orthonormal_basis(NL);
+%F2 = generate_orthonormal_basis(NL2);
 
 if (basis_is_orthonormal(F1) == false)
     warning('Basis NOT orthonormal. Something wrong \n');
 end
 
-if (basis_is_orthonormal(F2) == false)
-    warning('Basis NOT orthonormal. Something wrong \n');
-end
+%if (basis_is_orthonormal(F2) == false)
+%    warning('Basis NOT orthonormal. Something wrong \n');
+%end
 
 
 length_F1 = length(F1); % should be DL^2-1
-length_F2 = length(F2);
+%length_F2 = length(F2);
 
 for index = 1:length_F1
-    F1{index} = kron(F1{index},eye(dM*dL2)/sqrt(dM*dL2));
+    F1{index} = kron(F1{index},eye(dM)/sqrt(dM));
 end
 
-for index = 1:length_F2
-    F2{index} = kron(eye(dM*dL1)/sqrt(dM*dL1), F2{index});
-end
+%for index = 1:length_F2
+%    F2{index} = kron(eye(dM*dL1)/sqrt(dM*dL1), F2{index});
+%end
 
 
 if (basis_is_orthonormal(F1) == false)
     warning('Basis NOT orthonormal. Something wrong here! \n');
 end
 
-if (basis_is_orthonormal(F2) == false)
-    warning('Basis NOT orthonormal. Something wrong here! \n');
-end
+%if (basis_is_orthonormal(F2) == false)
+%    warning('Basis NOT orthonormal. Something wrong here! \n');
+%end
 
 
 %% Starting the SDP.
@@ -74,13 +74,13 @@ rho_th = dm_ness;  %setting our non-eq setup rho_th
 
 cvx_begin sdp 
     cvx_precision high %set CVX precision
-    variable H_LS1(dL1,dL1) hermitian %declare H_LS to be a hermitian matrix.
-    variable H_LS2(dL2,dL2) hermitian %declare H_LS to be a hermitian matrix.
-    variable gamma_matrix1(dL1^2-1,dL1^2-1) hermitian semidefinite %declare Gamma1 to be PSD matrix.
-    variable gamma_matrix2(dL2^2-1,dL2^2-1) hermitian semidefinite %declare Gamma2 to be PSD matrix.
+    variable H_LS1(dL,dL) hermitian %declare H_LS to be a hermitian matrix.
+    %variable H_LS2(dL2,dL2) hermitian %declare H_LS to be a hermitian matrix.
+    variable gamma_matrix1(dL^2-1,dL^2-1) hermitian semidefinite %declare Gamma1 to be PSD matrix.
+    %variable gamma_matrix2(dL2^2-1,dL2^2-1) hermitian semidefinite %declare Gamma2 to be PSD matrix.
 
 
-    objfunc = norm(create_L2(rho_th,H_S,H_LS1,gamma_matrix1,F1,NL1,NM + NL2) + create_L2(rho_th,H_S,H_LS2,gamma_matrix2,F2,NL2,NM + NL1) - L2_red);  %norm
+    objfunc = norm(create_L2(rho_th,H_S,H_LS1,gamma_matrix1,F1,NL,NM) - L2_red);  %norm
 
     %for i = 1:d
      %      objfunc = objfunc+ abs(V(:,i)'*create_L2(rho_th,H_S,H_LS,gamma_matrix,F,NL,NM)*V(:,i)) ;
