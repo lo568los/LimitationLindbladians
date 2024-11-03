@@ -13,10 +13,15 @@ Y3=getfield(load('./thermal_data_new3.mat'),'cvx_optval');
 Y4=getfield(load('./thermal_data_new4.mat'),'cvx_optval');
 
 Y5=getfield(load('./thermal_data_new5.mat'),'cvx_optval');
+Y6=getfield(load('./thermal_data_new6.mat'),'cvx_optval');
+Y7=getfield(load('./thermal_data_new7.mat'),'cvx_optval');
+Y8=getfield(load('./thermal_data_new8.mat'),'cvx_optval');
+Y9=getfield(load('./thermal_data_new9.mat'),'cvx_optval');
+Y10=getfield(load('./thermal_data_new10.mat'),'cvx_optval');
 %% make sure all these elists are the same !!! Makes comparison easier!!
 
-Y_1 = [Y1,Y2,Y3,Y4,Y5];
-X_1 = [1.0,1.2,1.5,1.7,2.0];
+Y_1 = [Y1,Y2,Y3,Y4,Y5,Y6,Y7,Y8,Y9,Y10];
+X_1 = [1.0,1.2,1.5,1.7,2.0,2.2,2.5,2.7,3.0,3.5];
 
 
 loglog(X_1,Y_1,'DisplayName',"$\beta_L = 1$",'LineWidth',3,'Marker','*','MarkerSize',15,'LineStyle','-');
