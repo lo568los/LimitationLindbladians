@@ -1,12 +1,12 @@
 % Code to minimize tau for given parameters. This serves as a numerical
 % check of the possiblity of thermalization..
 
-load("coh_data_N = 2_1.mat")
+load("coh_data_N = 4_3.mat")
 
 %decide paramteres.
 
 NL = 2; % has to be atleast 1
-NM = 0; % has to be atleast 1
+NM = 2; % has to be atleast 1
 %NL2 = 2;
 N = NL + NM;
 
@@ -89,7 +89,7 @@ cvx_begin sdp
 
     subject to %constraints..
         trace(gamma_matrix1) == 1;
-        trace(gamma_matrix2) == 1;
+        %trace(gamma_matrix2) == 1;
         
 cvx_end
 
@@ -100,7 +100,7 @@ cvx_end
 %    diag_values(i) = V(:,i)'*create_L2(rho_th,H_S,H_LS,gamma_matrix,F,NL,NM)*V(:,i);
 %end
 
-save("thermal_data_5")
+save("coh_data_6")
 
 %gamma_matrix_approx = round(gamma_matrix,5); % round to 5 places after decimal.
 %xlswrite("gamma_matrix.xlx",gamma_matrix_approx); % can be used to
