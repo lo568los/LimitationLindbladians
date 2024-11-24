@@ -202,6 +202,8 @@ def spectral_bath_2(omega,tb,gamma=1):
 
 
 def nbar(omega,beta,mu):
+    if beta*(omega-mu) < 10**(-14):
+        return 1/(beta*(omega-mu))
     return 1/(np.exp(beta*(omega-mu))-1)
 
 
