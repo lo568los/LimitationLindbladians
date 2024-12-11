@@ -160,7 +160,7 @@ def create_hamiltonian2(w0list,glist,N):
     H=(w0list[N-1])*create_projector0(N,N)
 
     for k in range(1,N):
-        H=H+(w0list[k-1])*create_projector0(N,k) + glist[k-1]*(create_projector01(N,k) + create_projector01(N,k).dag())
+        H=H+(w0list[k-1])*create_projector0(N,k) + (2*glist[k-1])*(create_projector01(N,k) + create_projector01(N,k).dag())
 
     return H
 
