@@ -4,7 +4,7 @@
 beta_list = [];
 optimal_value = [];
 for index1 = 1:10
-    load(sprintf("ness_data5_NL1 = 2_NL2 = 2_NM = 2_%d.mat",index1))
+    load(sprintf("ness_data6_NL1 = 2_NL2 = 2_NM = 2_%d.mat",index1))
 
 %decide paramteres.
 
@@ -32,7 +32,7 @@ for index1 = 1:10
     
     
     % create_hamiltonian
-    H_S = create_hamiltonian(w0list,glist,deltalist,N);
+    H_S = create_hamiltonian2(w0list,glist,N);
     
     
     
@@ -106,7 +106,7 @@ for index1 = 1:10
         diag_values(i) = V(:,i)'*(create_L2(rho_th,H_S,H_LS1,gamma_matrix1,F1,NL1,NM + NL2) + create_L2(rho_th,H_S,H_LS2,gamma_matrix2,F2,NL2,NM + NL1))*V(:,i);
     end
     
-    save(sprintf("./data_plotting_vsbeta_3/thermal_data_%d",index1))
+    save(sprintf("./data_plotting_vsbeta_3/thermal_data2_%d",index1))
     
     %gamma_matrix_approx = round(gamma_matrix,5); % round to 5 places after decimal.
     %xlswrite("gamma_matrix.xlx",gamma_matrix_approx); % can be used to
