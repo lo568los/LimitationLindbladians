@@ -24,6 +24,7 @@
 #SBATCH --mail-user=soumyadeep.sarma@icts.res.in
 #SBATCH --mail-type=ALL
 
+
 date
-python final_data_g.py $beta_r $ham_type $beta_l $e 
+python3 final_data_g.py $beta_r $ham_type $beta_l $e 
 date
