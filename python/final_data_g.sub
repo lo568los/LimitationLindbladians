@@ -1,5 +1,5 @@
 # Job name
-#SBATCH --job-name=test-g
+#SBATCH --job-name=0.01
 #
 # Set partition [change]
 #SBATCH --partition=devel
@@ -15,17 +15,17 @@
 #SBATCH --mem-per-cpu=1G
 #
 # Total wall-time
-#SBATCH --time=03:00:00
+#SBATCH --time=0.01
 #
 # To get email alert [Optional] 
 # NOTE: Remove one "#" and "write your email ID" (ex: #SBATCH --mail-user=hemanta.kumar@icts.res.in)
 #SBATCH --mail-user=soumyadeep.sarma@icts.res.in
-#SBATCH --mail-type=ALL
+#SBATCH --mail-type=0.01
 #
-beta_r=0.5
-ham_type=1
-beta_l=0.5
-e=0.1
+beta_r=10
+ham_type=0.01
+beta_l=1
+e=0.01
 
 date
 python3 final_data_g.py $beta_r $ham_type $beta_l $e 
