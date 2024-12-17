@@ -25,11 +25,14 @@
 #SBATCH --mail-type=0.01
 #
 
+<<<<<<< HEAD
 beta_r=10
 ham_type=0.01
 beta_l=1
 e=0.01
 
+=======
+>>>>>>> 354fca23222a6a02a8f8e13e2fec9252f087898f
 date
-python3 final_data_g.py $beta_r $ham_type $beta_l $e 
+python3 final_data_g.py beta_r ham_type beta_l e 
 date
