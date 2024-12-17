@@ -23,8 +23,7 @@
 # NOTE: Remove one "#" and "write your email ID" (ex: #SBATCH --mail-user=hemanta.kumar@icts.res.in)
 #SBATCH --mail-user=soumyadeep.sarma@icts.res.in
 #SBATCH --mail-type=ALL
-
-
+#
 date
 python3 final_data_g.py $beta_r $ham_type $beta_l $e 
 date
