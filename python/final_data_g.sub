@@ -22,8 +22,14 @@
 # To get email alert [Optional] 
 # NOTE: Remove one "#" and "write your email ID" (ex: #SBATCH --mail-user=hemanta.kumar@icts.res.in)
 #SBATCH --mail-user=soumyadeep.sarma@icts.res.in
-#SBATCH --mail-type=ALL
+##SBATCH --mail-type=ALL
 #
+
+beta_r=0.1
+ham_type=1
+beta_l=0.1
+e=0.1
+
 date
 python3 final_data_g.py $beta_r $ham_type $beta_l $e 
 date
