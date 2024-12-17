@@ -25,11 +25,6 @@
 #SBATCH --mail-type=ALL
 #
 
-beta_r=0.1
-ham_type=1
-g=0.1
-e=0.1
-
 date
-python3 final_data_beta.py $beta_r $ham_type $g $e
+python3 final_data_beta.py beta_r ham_type g e
 date

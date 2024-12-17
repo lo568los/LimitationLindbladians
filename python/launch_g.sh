@@ -9,10 +9,10 @@ do
             for e in 0 0.01
             do
 
-                sed -i "s/beta_r=.*/beta_r=${beta_r}/g" final_data_g.sub
-                sed -i "s/ham_type=.*/ham_type=${ham_type}/g" final_data_g.sub
-                sed -i "s/beta_l=.*/beta_l=${beta_l}/g" final_data_g.sub
-                sed -i "s/e=.*/e=${e}/g" final_data_g.sub
+                sed -i "s/.*beta_r.*/${beta_r}/g" final_data_g.sub
+                sed -i "s/.*ham_type.*/${ham_type}/g" final_data_g.sub
+                sed -i "s/.*beta_l.*/${beta_l}/g" final_data_g.sub
+                sed -i "s/.*e.*/${e}/g" final_data_g.sub
                 sbatch final_data_g.sub
             done
         done
