@@ -180,7 +180,7 @@ def re_ness_beta(beta_r,g,ham_type,e):
                 sum = 0
                 vi = eigstates[i]
                 vk = eigstates[k]
-                proj_i = vi*vi.dag()
+                #proj_i = vi*vi.dag()
                 proj_k = vk*vk.dag()
                 for y in range(number):
                     print("i = ",i,"k = ",k,"y = ",y)
