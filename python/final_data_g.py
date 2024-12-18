@@ -200,7 +200,11 @@ def re_ness_g(beta_r,beta_l,ham_type,e):
                         op2 = commutator(create_sm_list_right[l].dag(),proj_y*create_sm_list_right[l]*proj_k)*constant22[y,k]
                         sum1 += epsilon*epsilon*vi.dag()*(op2 + op2.dag())*vi
                 print(np.array(sum1))
+<<<<<<< HEAD
 	        print(np.array(sum1)[0])
+=======
+                print(np.array(sum1)[0])
+>>>>>>> 0d0980671640619f5bfacb2067079c780d71e088
                 A[i,k] = sum1
 
         b = np.zeros((number),dtype=complex)
