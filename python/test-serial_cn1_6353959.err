@@ -1,0 +1,4 @@
+  File "final_data_g.py", line 203
+    print(np.array(sum1)[0])
+                           ^
+TabError: inconsistent use of tabs and spaces in indentation

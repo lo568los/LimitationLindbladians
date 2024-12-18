@@ -176,41 +176,9 @@ def re_ness_g(beta_r,beta_l,ham_type,e):
 
         A = np.zeros((number,number),dtype=complex)
 
-<<<<<<< HEAD
-	for i in range(number):
-        	for k in range(number):
-                	sum1 = 0
-                	vi = eigstates[i]
-                	vk = eigstates[k]
-                	# proj_i = vi*vi.dag()
-                	proj_k = vk*vk.dag()
-                	for y in range(number):
-                    		for l in range(NL1):
-                        		proj_y = eigstates[y]*eigstates[y].dag()
-                        		op1 = commutator(proj_k*create_sm_list_left[l]*proj_y,create_sm_list_left[l].dag())*constant11[k,y]
-                        		sum1 += epsilon*epsilon*vi.dag()*(op1 + op1.dag())*vi
-
-                        		op2 = commutator(create_sm_list_left[l].dag(),proj_y*create_sm_list_left[l]*proj_k)*constant12[y,k]
-                        		sum1 += epsilon*epsilon*vi.dag()*(op2 + op2.dag())*vi
-			
-                    		for l in range(NL2):
-                        		proj_y = eigstates[y]*eigstates[y].dag()
-                        		op1 = commutator(proj_k*create_sm_list_right[l]*proj_y,create_sm_list_right[l].dag())*constant21[k,y]
-                        		sum1 += epsilon*epsilon*vi.dag()*(op1 + op1.dag())*vi
-
-                        		op2 = commutator(create_sm_list_right[l].dag(),proj_y*create_sm_list_right[l]*proj_k)*constant22[y,k]
-                        		sum1 += epsilon*epsilon*vi.dag()*(op2 + op2.dag())*vi
-                
-			print(type(sum1.data))
-			print(type(np.array(sum1)))
-			print(type(np.array(sum1)[0]))
-			print(type(sum1[0]))
-			print(type(sum1.data[0]))
-			A[i,k] = sum1
-=======
         for i in range(number):
             for k in range(number):
-                sum = 0
+                sum1 = 0
                 vi = eigstates[i]
                 vk = eigstates[k]
                 #proj_i = vi*vi.dag()
@@ -219,21 +187,21 @@ def re_ness_g(beta_r,beta_l,ham_type,e):
                     for l in range(NL1):
                         proj_y = eigstates[y]*eigstates[y].dag()
                         op1 = commutator(proj_k*create_sm_list_left[l]*proj_y,create_sm_list_left[l].dag())*constant11[k,y]
-                        sum += epsilon*epsilon*vi.dag()*(op1 + op1.dag())*vi
+                        sum1 += epsilon*epsilon*vi.dag()*(op1 + op1.dag())*vi
 
                         op2 = commutator(create_sm_list_left[l].dag(),proj_y*create_sm_list_left[l]*proj_k)*constant12[y,k]
-                        sum += epsilon*epsilon*vi.dag()*(op2 + op2.dag())*vi
+                        sum1 += epsilon*epsilon*vi.dag()*(op2 + op2.dag())*vi
 
                     for l in range(NL2):
                         proj_y = eigstates[y]*eigstates[y].dag()
                         op1 = commutator(proj_k*create_sm_list_right[l]*proj_y,create_sm_list_right[l].dag())*constant21[k,y]
-                        sum += epsilon*epsilon*vi.dag()*(op1 + op1.dag())*vi
+                        sum1 += epsilon*epsilon*vi.dag()*(op1 + op1.dag())*vi
 
                         op2 = commutator(create_sm_list_right[l].dag(),proj_y*create_sm_list_right[l]*proj_k)*constant22[y,k]
-                        sum += epsilon*epsilon*vi.dag()*(op2 + op2.dag())*vi
-                print(sum)
-                A[i,k] = sum
->>>>>>> ceddecedc299db0bd58c7a881cea1ed776dcbd14
+                        sum1 += epsilon*epsilon*vi.dag()*(op2 + op2.dag())*vi
+                print(np.array(sum1))
+	        print(np.array(sum1)[0])
+                A[i,k] = sum1
 
         b = np.zeros((number),dtype=complex)
         A_new = A[:-1]
