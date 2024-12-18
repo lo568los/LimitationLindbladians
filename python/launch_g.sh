@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-for beta_r in 0.5 1 5 10
+for beta_r in 0.5 
 do
     for beta_l in 1
     do
-        for ham_type in 1 2 
+        for ham_type in 1  
         do
-            for e in 0 0.01
+            for e1 in 0 
             do
 
                 sed -i "s/beta_r=.*/beta_r=${beta_r}/g" final_data_g.sub
