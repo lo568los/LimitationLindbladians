@@ -10,8 +10,8 @@ ham_type = int(sys.argv[2])
 beta_l = float(sys.argv[3])
 e = float(sys.argv[4])
 
-NL1 = 1
-NL2 = 1
+NL1 = 2
+NL2 = 2
 NM = 2
 
 N = NL1 + NL2 + NM
@@ -201,6 +201,8 @@ def re_ness_g(beta_r,beta_l,ham_type,e):
                         op2 = commutator(create_sm_list_right[l].dag(),proj_y*create_sm_list_right[l]*proj_k)*constant22[y,k]
                         sum1 += epsilon*epsilon*vi.dag()*(op2 + op2.dag())*vi
                 
+		#print(np.array(sum1))
+                #print(np.array(sum1)[0])
                 A[i,k] = np.array(sum1)[0][0]
 
         b = np.zeros((number),dtype=complex)
