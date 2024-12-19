@@ -107,6 +107,7 @@ def re_ness_g(beta_r,beta_l,ham_type,e):
         
         g = gvals[index]
         glist = np.linspace(g,g,N-1)
+        print("g is ",g)
         #Define the Hamiltonian
         if ham_type == 1:
             H_S = create_hamiltonian3(w0list,glist,delta,N)
