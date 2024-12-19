@@ -25,10 +25,10 @@
 #SBATCH --mail-type=ALL
 #
 
-beta_r=0.5
-ham_type=1
+beta_r=10
+ham_type=2
 beta_l=1
-e1=0
+e1=0.01
 
 date
 source /share/anaconda3/bin/activate
