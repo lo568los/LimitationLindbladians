@@ -93,9 +93,9 @@ def re_ness_g(beta_r,beta_l,ham_type,e):
     gamma1 = 1
     gamma2 = 1
     limit_value = 700
-    b_val = 500
-    mu1 = -1e-6
-    mu2 = -1e-6
+    b_val = 50
+    mu1 = -1e-10
+    mu2 = -1e-10
     epsilon = 0.01
     tb = 0.01
 
@@ -178,7 +178,7 @@ def re_ness_g(beta_r,beta_l,ham_type,e):
 
         for i in range(number):
             for k in range(number):
-                sum = 0
+                sum1 = 0
                 vi = eigstates[i]
                 vk = eigstates[k]
                 #proj_i = vi*vi.dag()
@@ -187,20 +187,20 @@ def re_ness_g(beta_r,beta_l,ham_type,e):
                     for l in range(NL1):
                         proj_y = eigstates[y]*eigstates[y].dag()
                         op1 = commutator(proj_k*create_sm_list_left[l]*proj_y,create_sm_list_left[l].dag())*constant11[k,y]
-                        sum += epsilon*epsilon*vi.dag()*(op1 + op1.dag())*vi
+                        sum1 += epsilon*epsilon*vi.dag()*(op1 + op1.dag())*vi
 
                         op2 = commutator(create_sm_list_left[l].dag(),proj_y*create_sm_list_left[l]*proj_k)*constant12[y,k]
-                        sum += epsilon*epsilon*vi.dag()*(op2 + op2.dag())*vi
+                        sum1 += epsilon*epsilon*vi.dag()*(op2 + op2.dag())*vi
 
                     for l in range(NL2):
                         proj_y = eigstates[y]*eigstates[y].dag()
                         op1 = commutator(proj_k*create_sm_list_right[l]*proj_y,create_sm_list_right[l].dag())*constant21[k,y]
-                        sum += epsilon*epsilon*vi.dag()*(op1 + op1.dag())*vi
+                        sum1 += epsilon*epsilon*vi.dag()*(op1 + op1.dag())*vi
 
                         op2 = commutator(create_sm_list_right[l].dag(),proj_y*create_sm_list_right[l]*proj_k)*constant22[y,k]
-                        sum += epsilon*epsilon*vi.dag()*(op2 + op2.dag())*vi
-
-                A[i,k] = sum
+                        sum1 += epsilon*epsilon*vi.dag()*(op2 + op2.dag())*vi
+                
+                A[i,k] = np.array(sum1)[0][0]
 
         b = np.zeros((number),dtype=complex)
         A_new = A[:-1]
