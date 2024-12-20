@@ -93,9 +93,9 @@ def re_ness_g(beta_r,beta_l,ham_type,e):
     gamma1 = 1
     gamma2 = 1
     limit_value = 700
-    b_val = 500
-    mu1 = -1e-6
-    mu2 = -1e-6
+    b_val = 50
+    mu1 = -1e-10
+    mu2 = -1e-10
     epsilon = 0.01
     tb = 0.01
 
@@ -106,6 +106,7 @@ def re_ness_g(beta_r,beta_l,ham_type,e):
         
         
         g = gvals[index]
+        print("g:",g)
         glist = np.linspace(g,g,N-1)
         #Define the Hamiltonian
         if ham_type == 1:
@@ -199,9 +200,9 @@ def re_ness_g(beta_r,beta_l,ham_type,e):
 
                         op2 = commutator(create_sm_list_right[l].dag(),proj_y*create_sm_list_right[l]*proj_k)*constant22[y,k]
                         sum1 += epsilon*epsilon*vi.dag()*(op2 + op2.dag())*vi
-                print(np.array(sum1))
-                print(np.array(sum1)[0])
-                A[i,k] = sum1
+                #print(np.array(sum1))
+                #print(np.array(sum1)[0])
+                A[i,k] = np.array(sum1)[0][0]
 
         b = np.zeros((number),dtype=complex)
         A_new = A[:-1]
