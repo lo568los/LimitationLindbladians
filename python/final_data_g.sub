@@ -28,7 +28,7 @@
 beta_r=10
 ham_type=2
 beta_l=1
-g1=0.016
+g1=10.0
 e1=0.01
 
 date
