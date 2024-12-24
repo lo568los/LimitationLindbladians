@@ -1,7 +1,7 @@
 % Code to minimize tau for given parameters. This serves as a numerical
 % check of the possiblity of thermalization..
 
-betal_list = [0.010,0.01873817,0.03511192,0.06579332,0.12328467,0.23101297,0.43287613,0.81113083,1.51991108,2.84803587,5.33669923];
+g_list = [0.010,0.01873817,0.03511192,0.06579332,0.12328467,0.23101297,0.43287613,0.81113083,1.51991108,2.84803587,5.33669923,10.000];
 %g_list2 = [0.010,0.019,0.035,0.066,0.123,0.231,0.433,1.52,2.84803587,5.33669923,10.000];
 betar_list = [0.5,1.0,5.0,10.0];
 optimal_value = [];
@@ -9,15 +9,15 @@ optimal_value = [];
 %for index = 1:length(beta_list2)
 ham_type=2;
 e = 0.01;
-for index1 = 1:length(betar_list)
-    disp(betar_list(index1))
-    for index2 = 1:length(betal_list)
-        load(sprintf("ness_data_NL1=2,NL2=2,NM=2,e=%.2f,beta_r=%.1f,beta_l=%.3f,g=%.3f_%d.mat",e,betar_list(index1),g_list(index2),ham_type))
+for index1 = 1:length(betal_list)
+    disp("Beta_r is:",betar_list(index1))
+    for index2 = 1:12
+        load(sprintf("ness_data_NL1=1,NL2=1,NM=2,e=%.2f,beta_r=%.1f,beta_l=%.1f,g=%.3f_%d.mat",index1))
     
     %decide paramteres.
     
-        NL1 = 2; % has to be atleast 1
-        NL2 = 2;
+        NL1 = 1; % has to be atleast 1
+        NL2 = 1;
         NM = 2; % has to be atleast 1
         N = NL1+NL2+NM;
         
@@ -129,5 +129,5 @@ for index1 = 1:length(betar_list)
         %xlswrite("gamma_matrix.xlx",gamma_matrix_approx); % can be used to
         %conveniently print out the matrix ..
     end
-    save(sprintf("./data_plotting_vsbeta_4/diag_data_NL1=%d,e=%.2f,beta_r=%.1f,g=0.016,ham_type=%d.mat",NL1,e,betar_list(index1),ham_type))
+    save(sprintf("./data_plotting_vsg_3/diag_data_NL1=%d,e=%.2f,beta_r=%.1f,beta_l=1,ham_type=%d.mat",NL1,e,betar_list(index1),ham_type))
 end
