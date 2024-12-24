@@ -12,12 +12,12 @@ e = 0.01;
 for index1 = 1:length(betar_list)
     disp(betar_list(index1))
     for index2 = 1:length(g_list)
-        load(sprintf("ness_data_NL1=1,NL2=1,NM=2,e=%.2f,beta_r=%.1f,beta_l=1.0,g=%.3f_%d.mat",e,betar_list(index1),g_list(index2),ham_type))
+        load(sprintf("ness_data_NL1=2,NL2=2,NM=2,e=%.2f,beta_r=%.1f,beta_l=1.0,g=%.3f_%d.mat",e,betar_list(index1),g_list(index2),ham_type))
     
     %decide paramteres.
     
-        NL1 = 1; % has to be atleast 1
-        NL2 = 1;
+        NL1 = 2; % has to be atleast 1
+        NL2 = 2;
         NM = 2; % has to be atleast 1
         N = NL1+NL2+NM;
         

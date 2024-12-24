@@ -33,5 +33,5 @@ e1=0.01
 
 date
 source /share/anaconda3/bin/activate
-python3 final_data_g.py $beta_r $beta_l $ham_type $g1 $e1 
+python3 final_data_beta.py $beta_r $beta_l $ham_type $g1 $e1 
 date
