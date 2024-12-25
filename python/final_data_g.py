@@ -11,8 +11,8 @@ ham_type = int(sys.argv[3])
 beta_l = float(sys.argv[4])
 e = float(sys.argv[5])
 
-NL1 = 2
-NL2 = 2
+NL1 = 1
+NL2 = 1
 NM = 2
 
 N = NL1 + NL2 + NM
