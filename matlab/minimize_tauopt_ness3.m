@@ -1,18 +1,18 @@
 % Code to minimize tau for given parameters. This serves as a numerical
 % check of the possiblity of thermalization..
 
-g_list = [0.010,0.01873817,0.03511192,0.06579332,0.12328467,0.23101297,0.43287613,0.81113083,1.51991108,2.84803587,5.33669923];
+g_list = [0.0010,0.00187382,0.00351119,0.00657933,0.01232847,0.0231013,0.04328761,0.08111308,0.15199111,0.28480359,0.53366992,1.0000];
 %g_list2 = [0.010,0.019,0.035,0.066,0.123,0.231,0.433,1.52,2.84803587,5.33669923,10.000];
 betar_list = [0.5,1.0,5.0,10.0];
 optimal_value = [];
 %load(sprintf("./data_plotting_vsbeta_4/ness_data_NL1=1,NL2=1,NM=2,e=0,beta_r=1,g=0.0016_1.mat"))
 %for index = 1:length(beta_list2)
-ham_type=2;
+ham_type=1;
 e = 0.01;
 for index1 = 1:length(betar_list)
     disp(betar_list(index1))
     for index2 = 1:length(g_list)
-        load(sprintf("ness_data_NL1=2,NL2=2,NM=2,e=%.2f,beta_r=%.1f,beta_l=1.0,g=%.3f_%d.mat",e,betar_list(index1),g_list(index2),ham_type))
+        load(sprintf("ness_data_NL1=2,NL2=2,NM=2,e=%.2f,beta_r=%.1f,beta_l=1.0,g=%.4f_%d.mat",e,betar_list(index1),g_list(index2),ham_type))
     
     %decide paramteres.
     
