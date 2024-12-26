@@ -4,7 +4,7 @@
 #SBATCH --job-name=test-beta
 #
 # Set partition [change]
-#SBATCH --partition=devel
+#SBATCH --partition=short
 #
 # STDOUT file; "N" is node number and "j" job id number
 #SBATCH --output=test-serial_%N_%j.out
@@ -17,14 +17,21 @@
 #SBATCH --mem-per-cpu=1G
 #
 # Total wall-time
-#SBATCH --time=03:00:00
+#SBATCH --time=1-00
 #
 # To get email alert [Optional] 
 # NOTE: Remove one "#" and "write your email ID" (ex: #SBATCH --mail-user=hemanta.kumar@icts.res.in)
-#SBATCH --mail-user=soumyadeep.sarma@icts.res.in
-#SBATCH --mail-type=ALL
+##SBATCH --mail-user=soumyadeep.sarma@icts.res.in
+##SBATCH --mail-type=ALL
 #
 
+beta_r=10.0
+ham_type=2
+beta_l=10.000
+g1=0.0016
+e1=0.01
+
 date
-python3 final_data_beta.py beta_r ham_type g e
+source /share/anaconda3/bin/activate
+python3 final_data_beta.py $beta_r $beta_l $ham_type $g1 $e1 
 date
