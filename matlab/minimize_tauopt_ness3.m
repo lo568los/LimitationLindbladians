@@ -7,17 +7,17 @@ betar_list = [0.5,1.0,5.0,10.0];
 optimal_value = [];
 %load(sprintf("./data_plotting_vsbeta_4/ness_data_NL1=1,NL2=1,NM=2,e=0,beta_r=1,g=0.0016_1.mat"))
 %for index = 1:length(beta_list2)
-ham_type=1;
+ham_type=2;
 e = 0.01;
 for index1 = 1:length(betar_list)
     disp(betar_list(index1))
     for index2 = 1:length(g_list)
-        load(sprintf("ness_data_NL1=2,NL2=2,NM=2,e=%.2f,beta_r=%.1f,beta_l=1.0,g=%.4f_%d.mat",e,betar_list(index1),g_list(index2),ham_type))
+        load(sprintf("ness_data_NL1=1,NL2=1,NM=2,e=%.2f,beta_r=%.1f,beta_l=1.0,g=%.4f_%d.mat",e,betar_list(index1),g_list(index2),ham_type))
     
     %decide paramteres.
     
-        NL1 = 2; % has to be atleast 1
-        NL2 = 2;
+        NL1 = 1; % has to be atleast 1
+        NL2 = 1;
         NM = 2; % has to be atleast 1
         N = NL1+NL2+NM;
         
@@ -91,7 +91,7 @@ for index1 = 1:length(betar_list)
         %% Starting the SDP.
     
         solution = minimize_tauopt_function(NL1,NL2,NM,H_S,dm_ness);
-        optimal_value(index) = solution.optimal_val;
+        optimal_value(index2) = solution.optimal_val;
         disp(solution.cvx_status);
         
         %rho_th = dm_ness;  %setting our non-eq setup rho_th
