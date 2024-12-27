@@ -96,7 +96,7 @@ for e1 = 1:length(e_list)
                 
                 %% Starting the SDP.
             
-                solution = minimize_tauopt_function2(NL1,NL2,NM,H_S,dm_ness);
+                solution = minimize_tauopt_function2(NL1,NL2,NM,H_S,dm_ness,L2_red);
                 optimal_value(index2) = solution.optimal_val;
                 disp(solution.cvx_status);
                 
