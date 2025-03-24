@@ -1,6 +1,6 @@
 e = 0.01;
 ham_type=2;
-NL1=1;
+NL1=2;
 
 
 X1=getfield(load(sprintf('./coh_data_NL1=%d,e=%.2f,beta_r=10.0,g=0.0016,ham_type=%d.mat',NL1,e,ham_type)),'betal_list');
@@ -33,7 +33,7 @@ fontsize(gca,45,"pixels")
 legend('location','southwest','Interpreter','latex')
 yline(1e-6,'--','Linewidth',3,'HandleVisibility','off');
 
-set(gca,'Ytick',logspace(-6,-1,6));
+set(gca,'Ytick',logspace(-7,-1,7));
 hold off;
 
 savefig(sprintf('coh_plot_NL1=%d,e=%.2f,ham_type=%d.fig',NL1,e,ham_type))

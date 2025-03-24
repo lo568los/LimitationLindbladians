@@ -4,9 +4,9 @@
 %betal_list = [0.100 0.15199111 0.23101297 0.35111917 0.53366992 0.81113083 1.23284674 1.87381742 2.84803587 4.32876128 6.57933225 10.000];
 %g_list2 = [0.010,0.019,0.035,0.066,0.123,0.231,0.433,1.52,2.84803587,5.33669923,10.000];
 g_list = [0.0010,0.00187382,0.00351119,0.00657933,0.01232847,0.0231013,0.04328761,0.08111308,0.15199111,0.28480359,0.53366992,1.0000];
-betar_list = [0.5,1.0,5.0,10.0];
-e_list = [0.00,0.01];
-h_list = [1,2];
+betar_list = [1.0];
+e_list = [0.00];
+h_list = [1];
 optimal_value = [];
 %load(sprintf("./data_plotting_vsbeta_4/ness_data_NL1=1,NL2=1,NM=2,e=0,beta_r=1,g=0.0016_1.mat"))
 %for index = 1:length(beta_list2)
@@ -19,14 +19,16 @@ for e1 = 1:length(e_list)
         for index1 = 1:length(betar_list)
             disp(betar_list(index1))
             for index2 = 1:length(g_list)
-                load(sprintf("ness_data_NL1=2,NL2=2,NM=2,e=%.2f,beta_r=%.1f,beta_l=1.0,g=%.4f_%d.mat",e,betar_list(index1),g_list(index2),ham_type))'
+                load(sprintf("./Other_coh_data/coh_data_NL = 3,NM = 1_g%d.mat",index2))
+
+                %ness_data_NL1=2,NL2=2,NM=2,e=%.2f,beta_r=%.1f,beta_l=1.0,g=%.4f_%d.mat
                 
             
             %decide paramteres.
             
-                NL1 = 2; % has to be atleast 1
-                NL2 = 2;
-                NM = 2; % has to be atleast 1
+                NL1 = 3; % has to be atleast 1
+                NL2 = 0;
+                NM = 1; % has to be atleast 1
                 N = NL1+NL2+NM;
                 
                 dL1 = 2^NL1;
@@ -36,11 +38,11 @@ for e1 = 1:length(e_list)
                 
                 
                 g = g_list(index2);
-                w0list = zeros(N,1) + 2;
-                glist = zeros(N-1,1)- g;
-                w0list(4) = 2 + 2*e;
-                w0list(5) = 2 + 2*e;
-                w0list(6) = 2 + 2*e;
+                w0list = zeros(N,1) + 1;
+                glist = zeros(N-1,1)+ g;
+                w0list(4) = 1 + e;
+                w0list(5) = 1 + e;
+                w0list(6) = 1 + e;
                 if ham_type == 1
                     deltalist = zeros(N-1,1) + 1;
                 end
@@ -137,7 +139,7 @@ for e1 = 1:length(e_list)
                 %xlswrite("gamma_matrix.xlx",gamma_matrix_approx); % can be used to
                 %conveniently print out the matrix ..
             end
-            save(sprintf("./data_plotting_vsg_3/coh_data_NL1=%d,e=%.2f,beta_r=%.1f,beta_l=1.0,ham_type=%d.mat",NL1,e,betar_list(index1),ham_type))
+            save(sprintf("./data_plotting_vsg_3/coh_data_NL1=%d,NM=0,e=%.2f,beta_r=%.1f,beta_l=1.0,ham_type=%d.mat",NL1,e,betar_list(index1),ham_type))
         end
     end
 end

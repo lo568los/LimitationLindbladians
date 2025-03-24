@@ -1,9 +1,9 @@
 % Code to minimize tau for given parameters. This serves as a numerical
 % check of the possiblity of thermalization..
 
-NL1 = 1; % has to be atleast 1
-NL2 = 1;
-NM = 2; % has to be atleast 1
+NL1 = 3; % has to be atleast 1
+NL2 = 0;
+NM = 0; % has to be atleast 1
 N = NL1+NL2+NM;
 e=0;
 beta_r=0.5;
