@@ -3,7 +3,7 @@
 
 betal_list = [0.100 0.15199111 0.23101297 0.35111917 0.53366992 0.81113083 1.23284674 1.87381742 2.84803587 4.32876128 6.57933225 10.000];
 %g_list2 = [0.010,0.019,0.035,0.066,0.123,0.231,0.433,1.52,2.84803587,5.33669923,10.000];
-betar_list = [0.5,1.0,5.0,10.0];
+betar_list = [1.0,5.0,10.0];
 e_list = [0.00,0.01];
 h_list = [1];
 optimal_value = [];
@@ -18,12 +18,12 @@ for e1 = 1:length(e_list)
         for index1 = 1:length(betar_list)
             disp(betar_list(index1))
             for index2 = 1:length(betal_list)
-                load(sprintf("ness_data_NL1=1,NL2=1,NM=2,e=%.2f,beta_r=%.1f,beta_l=%.3f,g=0.1000_%d.mat",e,betar_list(index1),betal_list(index2),ham_type))
+                load(sprintf("ness_data_NL1=2,NL2=2,NM=2,e=%.2f,beta_r=%.1f,beta_l=%.3f,g=0.1000_%d.mat",e,betar_list(index1),betal_list(index2),ham_type))
             
             %decide paramteres.
             
-                NL1 = 1; % has to be atleast 1
-                NL2 = 1;
+                NL1 = 2; % has to be atleast 1
+                NL2 = 2;
                 NM = 2; % has to be atleast 1
                 N = NL1+NL2+NM;
                 
