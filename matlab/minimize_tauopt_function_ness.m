@@ -1,13 +1,13 @@
 % Code to minimize tau for given parameters. This serves as a numerical
 % check of the possiblity of thermalization..
 
-NL1 = 1; % has to be atleast 1
-NL2 = 1;
+NL1 = 2; % has to be atleast 1
+NL2 = 2;
 NM = 2; % has to be atleast 1
 N = NL1+NM+NL2;
 e=0;
 beta_r=1.5;
-g=0.0016;
+g=0.1000;
 ham_type=1;
 
 beta_list = [0.1,0.15199111,0.23101297,0.35111917,0.53366992,0.81113083,1.23284674,1.87381742,2.84803587,4.32876128,6.5793322,10.0];
@@ -55,4 +55,4 @@ for index = 1:length(beta_list2)
     %conveniently print out the matrix ..
 end
 
-%save(sprintf("./data_plotting_vsbeta_4/plotting_data_NL1=%d_NL2=%d_NM=%d,e=%f,beta_r=%d,g=%f_%d.mat",NL1,NL2,NM,e,beta_r,g,ham_type))
+save(sprintf("./data_plotting_vsbeta_4/plotting_data_NL1=%d_NL2=%d_NM=%d,e=%f,beta_r=%d,g=%f_%d.mat",NL1,NL2,NM,e,beta_r,g,ham_type))
