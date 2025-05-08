@@ -58,12 +58,12 @@ function [output] = minimize_tauopt_function2(NL1,NL2,NM,H_S,dm_ness1,L2_red1)
     cvx_begin sdp 
         cvx_precision high %set CVX precision
         variable H_LS1(dL1,dL1) hermitian %declare H_LS to be a hermitian matrix.
-        %variable H_LS2(dL2,dL2) hermitian %declare H_LS to be a hermitian matrix.
+        variable H_LS2(dL2,dL2) hermitian %declare H_LS to be a hermitian matrix.
         variable gamma_matrix1(dL1^2-1,dL1^2-1) hermitian semidefinite %declare Gamma1 to be PSD matrix.
-        %variable gamma_matrix2(dL2^2-1,dL2^2-1) hermitian semidefinite %declare Gamma2 to be PSD matrix.
+        variable gamma_matrix2(dL2^2-1,dL2^2-1) hermitian semidefinite %declare Gamma2 to be PSD matrix.
     
     
-        objfunc = norm(create_L2(rho_th,H_S,H_LS1,gamma_matrix1,F1,NL1,NM + NL2) - L2_red1);  %norm + create_L2_2(rho_th,H_S,H_LS2,gamma_matrix2,F2,NL2,NM + NL1)
+        objfunc = norm(create_L2(rho_th,H_S,H_LS1,gamma_matrix1,F1,NL1,NM + NL2) + create_L2_2(rho_th,H_S,H_LS2,gamma_matrix2,F2,NL2,NM + NL1) - L2_red1);  %norm + create_L2_2(rho_th,H_S,H_LS2,gamma_matrix2,F2,NL2,NM + NL1)
     
         %for i = 1:d
          %      objfunc = objfunc+ abs(V(:,i)'*create_L2(rho_th,H_S,H_LS,gamma_matrix,F,NL,NM)*V(:,i)) ;
