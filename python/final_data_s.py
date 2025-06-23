@@ -14,8 +14,8 @@ e = float(sys.argv[4])
 ham_type = 1
 g = 0.01
 
-NL1 = 1
-NL2 = 1
+NL1 = 2
+NL2 = 2
 NM = 2
 
 N = NL1 + NL2 + NM
