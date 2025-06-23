@@ -185,18 +185,18 @@ def create_hamiltonian_v2(w0list,glist,deltalist,N): #includes deltalist
 
 
 
-def spectral_bath(omega,tb,gamma=1):
+def spectral_bath(omega,s,tb,gamma=1):
     if(omega <=0):
         return 0
 
-    return gamma*omega*np.exp(-omega*omega*tb)
+    return gamma*(omega**s)*np.exp(-omega*omega*tb)
 
 
 
-def spectral_bath_2(omega,tb,gamma=1):
+def spectral_bath_2(omega,s,tb,gamma=1):
     if(omega <=0):
         return 0
-    return gamma*np.exp(-omega*omega*tb)
+    return gamma*(omega**(s-1))*np.exp(-omega*omega*tb)
     
 
 
@@ -207,19 +207,19 @@ def nbar(omega,beta,mu):
     return 1/(np.exp(beta*(omega-mu))-1)
 
 
-def func1(omega,tb,beta,mu,gamma=1):
+def func1(omega,s,tb,beta,mu,gamma=1):
     if(omega <=0):
         return 0
 
-    return spectral_bath(omega,tb,gamma)*nbar(omega,beta,mu)
+    return spectral_bath(omega,s,tb,gamma)*nbar(omega,beta,mu)
 
 
 
-def func2(omega,tb,beta,mu,gamma=1):
+def func2(omega,s,tb,beta,mu,gamma=1):
     if(omega<=0):
         return 0
 
-    return spectral_bath_2(omega,tb,gamma)*nbar(omega,beta,mu)
+    return spectral_bath_2(omega,s,tb,gamma)*nbar(omega,beta,mu)
 
 
 
