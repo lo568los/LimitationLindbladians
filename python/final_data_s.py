@@ -7,7 +7,7 @@ import sys
 
 beta_r = float(sys.argv[1])
 #g = float(sys.argv[2])
-s = int(sys.argv[2])
+s = float(sys.argv[2])
 beta_l = float(sys.argv[3])
 e = float(sys.argv[4])
 
