@@ -232,7 +232,7 @@ def re_ness_g(beta_r,beta_l,s,g,ham_type,e):
 
     scipy.io.savemat(f'ness_data_NL1={NL1},NL2={NL2},NM={NM},e={e:.2f},beta_r={beta_r:.1f},beta_l={beta_l:.1f},g={g:.4f},s={s}.mat',data_dict)
 
-re_ness_g(beta_r,beta_l,g,ham_type,e)
+re_ness_g(beta_r,beta_l,s,g,ham_type,e)
 
 
 
