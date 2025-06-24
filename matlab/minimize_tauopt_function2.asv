@@ -26,7 +26,7 @@ function [output] = minimize_tauopt_function2(NL1,NL2,NM,H_S,dm_ness1,L2_red1)
     
     if (basis_is_orthonormal(F2) == false)
         warning('Basis NOT orthonormal. Something wrong \n');
-    end
+    %end
     
     
     length_F1 = length(F1); % should be DL^2-1
@@ -56,7 +56,6 @@ function [output] = minimize_tauopt_function2(NL1,NL2,NM,H_S,dm_ness1,L2_red1)
     rho_th = dm_ness1;  %setting our non-eq setup rho_th
     output = struct(); % Pre-initialize output
     
-    
     cvx_begin sdp 
         cvx_precision high %set CVX precision
         variable H_LS1(dL1,dL1) hermitian %declare H_LS to be a hermitian matrix.
@@ -77,8 +76,8 @@ function [output] = minimize_tauopt_function2(NL1,NL2,NM,H_S,dm_ness1,L2_red1)
             trace(gamma_matrix2) == 1;
             
     cvx_end
-        
     
+
     %Store all relevant info in output..
     output.optimal_val = cvx_optval; %stores tau_opt
     output.gamma_matrix1 = gamma_matrix1; 
@@ -88,7 +87,7 @@ function [output] = minimize_tauopt_function2(NL1,NL2,NM,H_S,dm_ness1,L2_red1)
     output.H_LS2 = H_LS2;
     output.cvx_status = cvx_status;
     %output.F = F;
-   
+
     return
 end
 
