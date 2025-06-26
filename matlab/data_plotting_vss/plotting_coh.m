@@ -1,19 +1,19 @@
-e = 0.01;
+e = 0.00;
 ham_type=1;
 NL1=2;
 
 
-X1=getfield(load(sprintf('./coh_data_NL1=%d,e=%.2f,beta_r=10.0,g=0.0100,ham_type=%d.mat',NL1,e,ham_type)),'s_list');
-Y1=getfield(load(sprintf('./coh_data_NL1=%d,e=%.2f,beta_r=10.0,g=0.0100,ham_type=%d.mat',NL1,e,ham_type)),'optimal_value');
+X1=getfield(load(sprintf('./coh_data_NL1=%d,e=%.2f,beta_r=10.0,g=0.1000,ham_type=%d.mat',NL1,e,ham_type)),'s_list');
+Y1=getfield(load(sprintf('./coh_data_NL1=%d,e=%.2f,beta_r=10.0,g=0.1000,ham_type=%d.mat',NL1,e,ham_type)),'optimal_value');
 
-X2=getfield(load(sprintf('./coh_data_NL1=%d,e=%.2f,beta_r=5.0,g=0.0100,ham_type=%d.mat',NL1,e,ham_type)),'s_list');
-Y2=getfield(load(sprintf('./coh_data_NL1=%d,e=%.2f,beta_r=5.0,g=0.0100,ham_type=%d.mat',NL1,e,ham_type)),'optimal_value');
+X2=getfield(load(sprintf('./coh_data_NL1=%d,e=%.2f,beta_r=5.0,g=0.1000,ham_type=%d.mat',NL1,e,ham_type)),'s_list');
+Y2=getfield(load(sprintf('./coh_data_NL1=%d,e=%.2f,beta_r=5.0,g=0.1000,ham_type=%d.mat',NL1,e,ham_type)),'optimal_value');
 
-X3=getfield(load(sprintf('./coh_data_NL1=%d,e=%.2f,beta_r=1.0,g=0.0100,ham_type=%d.mat',NL1,e,ham_type)),'s_list');
-Y3=getfield(load(sprintf('./coh_data_NL1=%d,e=%.2f,beta_r=1.0,g=0.0100,ham_type=%d.mat',NL1,e,ham_type)),'optimal_value');
+X3=getfield(load(sprintf('./coh_data_NL1=%d,e=%.2f,beta_r=1.0,g=0.1000,ham_type=%d.mat',NL1,e,ham_type)),'s_list');
+Y3=getfield(load(sprintf('./coh_data_NL1=%d,e=%.2f,beta_r=1.0,g=0.1000,ham_type=%d.mat',NL1,e,ham_type)),'optimal_value');
 
-X4=getfield(load(sprintf('./coh_data_NL1=%d,e=%.2f,beta_r=0.5,g=0.0100,ham_type=%d.mat',NL1,e,ham_type)),'s_list'); 
-Y4=getfield(load(sprintf('./coh_data_NL1=%d,e=%.2f,beta_r=0.5,g=0.0100,ham_type=%d.mat',NL1,e,ham_type)),'optimal_value');
+X4=getfield(load(sprintf('./coh_data_NL1=%d,e=%.2f,beta_r=0.5,g=0.1000,ham_type=%d.mat',NL1,e,ham_type)),'s_list'); 
+Y4=getfield(load(sprintf('./coh_data_NL1=%d,e=%.2f,beta_r=0.5,g=0.1000,ham_type=%d.mat',NL1,e,ham_type)),'optimal_value');
 
 %% make sure all these elists are the same !!! Makes comparison easier!!
 
@@ -39,4 +39,4 @@ xlim([0.75 3]);
 set(gca, 'YScale', 'log', 'YTickLabelMode', 'auto');
 hold off;
 
-savefig(sprintf('coh_plot_NL1=%d,e=%.2f,ham_type=%d.fig',NL1,e,ham_type))
+savefig(sprintf('coh_plot_NL1=%d,e=%.2f,g=0.1,ham_type=%d.fig',NL1,e,ham_type))

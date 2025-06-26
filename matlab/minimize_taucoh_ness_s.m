@@ -18,7 +18,7 @@ for e1 = 1:length(e_list)
         for index1 = 1:length(betar_list)
             disp(betar_list(index1))
             for index2 = 1:length(s_list)
-                load(sprintf("ness_data_NL1=2,NL2=2,NM=2,e=%.2f,beta_r=%.1f,beta_l=1.0,g=0.0100,s=%.2f.mat",e,betar_list(index1),s_list(index2)))
+                load(sprintf("ness_data_NL1=2,NL2=2,NM=2,e=%.2f,beta_r=%.1f,beta_l=1.0,g=0.1000,s=%.2f.mat",e,betar_list(index1),s_list(index2)))
             
             %decide paramteres.
             
@@ -33,7 +33,7 @@ for e1 = 1:length(e_list)
                 d = dL1*dL2*dM;
                 
                 
-                g = 0.0100;
+                g = 0.1000;
                 w0list = zeros(N,1) + 2;
                 glist = zeros(N-1,1)- g;
                 w0list(4) = 2 + 2*e;
@@ -135,7 +135,7 @@ for e1 = 1:length(e_list)
                 %xlswrite("gamma_matrix.xlx",gamma_matrix_approx); % can be used to
                 %conveniently print out the matrix ..
             end
-            save(sprintf("./data_plotting_vss/coh_data_NL1=%d,e=%.2f,beta_r=%.1f,g=0.0100,ham_type=%d.mat",NL1,e,betar_list(index1),ham_type))
+            save(sprintf("./data_plotting_vss/coh_data_NL1=%d,e=%.2f,beta_r=%.1f,g=0.1000,ham_type=%d.mat",NL1,e,betar_list(index1),ham_type))
         end
     end
 end
