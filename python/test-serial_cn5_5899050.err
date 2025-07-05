@@ -1,6 +1,0 @@
-/home/soumyadeep.sarma/.local/lib/python3.6/site-packages/qutip/__init__.py:68: UserWarning: The new version of Cython, (>= 3.0.0) is not supported.
-  .format(_Cython.__version__)
-final_data_s.py:146: IntegrationWarning: The integral is probably divergent, or slowly convergent.
-  integral11[i,k]=(-1.0j/(2*np.pi))*integrate.quad(func2,0,b_val,args=(s,tb,beta2,mu2,gamma1),limit=limit_value)[0]
-final_data_s.py:148: IntegrationWarning: The integral is probably divergent, or slowly convergent.
-  integral21[i,k]=(-1.0j/(2*np.pi))*integrate.quad(func2,0,b_val,args=(s,tb,beta1,mu1,gamma2),limit=limit_value)[0]

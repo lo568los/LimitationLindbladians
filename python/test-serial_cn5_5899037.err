@@ -1,2 +1,0 @@
-/home/soumyadeep.sarma/.local/lib/python3.6/site-packages/qutip/__init__.py:68: UserWarning: The new version of Cython, (>= 3.0.0) is not supported.
-  .format(_Cython.__version__)

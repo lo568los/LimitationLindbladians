@@ -33,7 +33,7 @@ create_sm_list_right = [create_sm(N,NM + NL1 + i + 1) for i in range(NL2)]
 def integral1(i,k,s,tb,beta,mu,gamma,eigenergies,limit_value = 700,b=50):
     freq=eigenergies[k]-eigenergies[i]
     if( np.absolute(freq) >= 1/10**10):
-        integral = (-1.0j/(2*np.pi))*integrate.quad(func1,0,b,args=(s,tb,beta,mu,gamma),limit=limit_value,weight='cauchy',wvar=eigenergies[k]-eigenergies[i])[0]
+        integral = (-1.0j/(2*np.pi))*integrate.quad(func1/freq,0,b,args=(s,tb,beta,mu,gamma),limit=limit_value,weight='cauchy',wvar=eigenergies[k]-eigenergies[i])[0]
     else:
         integral = (-1.0j/(2*np.pi))*integrate.quad(func2,0,b,args=(s,tb,beta,mu,gamma),limit=limit_value)[0]
     return integral

@@ -3,7 +3,7 @@
 
 s_list = [0.75,1.00,1.25,1.50,1.75,2.00,2.25,2.50,2.75,3.00];
 %g_list2 = [0.010,0.019,0.035,0.066,0.123,0.231,0.433,1.52,2.84803587,5.33669923,10.000];
-betar_list = [5.0,10.0];
+betar_list = [0.5,1.0,5.0,10.0];
 e_list = [0.00,0.01];
 h_list = [1];
 optimal_value = [];
@@ -18,7 +18,7 @@ for e1 = 1:length(e_list)
         for index1 = 1:length(betar_list)
             disp(betar_list(index1))
             for index2 = 1:length(s_list)
-                load(sprintf("ness_data_NL1=2,NL2=2,NM=2,e=%.2f,beta_r=%.1f,beta_l=1.0,g=0.1000,s=%.2f.mat",e,betar_list(index1),s_list(index2)))
+                load(sprintf("ness_data_NL1=2,NL2=2,NM=2,e=%.2f,beta_r=%.1f,beta_l=1.0,g=1.0000,s=%.2f.mat",e,betar_list(index1),s_list(index2)))
             
             %decide paramteres.
             
@@ -135,7 +135,7 @@ for e1 = 1:length(e_list)
                 %xlswrite("gamma_matrix.xlx",gamma_matrix_approx); % can be used to
                 %conveniently print out the matrix ..
             end
-            save(sprintf("./data_plotting_vss/diag_data_NL1=%d,e=%.2f,beta_r=%.1f,g=0.1000,ham_type=%d.mat",NL1,e,betar_list(index1),ham_type))
+            save(sprintf("./data_plotting_vss/diag_data_NL1=%d,e=%.2f,beta_r=%.1f,g=1.0000,ham_type=%d.mat",NL1,e,betar_list(index1),ham_type))
         end
     end
 end
