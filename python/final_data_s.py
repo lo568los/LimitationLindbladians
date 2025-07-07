@@ -12,7 +12,7 @@ beta_l = float(sys.argv[3])
 e = float(sys.argv[4])
 
 ham_type = 1
-g = 1
+g = 0.01
 
 NL1 = 2
 NL2 = 2
