@@ -40,4 +40,4 @@ xlim([0.75 3]);
 set(gca, 'YScale', 'log', 'YTickLabelMode', 'auto');
 hold off;
 
-savefig(sprintf('coh_plot_new_NL1=%d,e=%.2f,g=%.4f,ham_type=%d.fig',NL1,e,g,ham_type))
+savefig(sprintf('coh_plot_new_NL1=%d,e=%.2f,g=1.0000,ham_type=%d.fig',NL1,e,ham_type))
