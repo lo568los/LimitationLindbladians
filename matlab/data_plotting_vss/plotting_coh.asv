@@ -4,7 +4,7 @@ NL1=2;
 g=0.0100;
 
 
-X1=getfield(load(sprintf('./coh_data_NL1=%d,e=%.2f,beta_r=10.0,g=%.4f,ham_type=%d.mat',NL1,e,g,ham_type)),'s_list');
+X1=getfield(load(sprintf('./coh_data_new_NL1=%d,e=%.2f,beta_r=10.0,g=%.4f,ham_type=%d.mat',NL1,e,g,ham_type)),'s_list');
 Y1=getfield(load(sprintf('./coh_data_NL1=%d,e=%.2f,beta_r=10.0,g=%.4f,ham_type=%d.mat',NL1,e,g,ham_type)),'optimal_value');
 
 X2=getfield(load(sprintf('./coh_data_NL1=%d,e=%.2f,beta_r=5.0,g=%.4f,ham_type=%d.mat',NL1,e,g,ham_type)),'s_list');
@@ -40,4 +40,4 @@ xlim([0.75 3]);
 set(gca, 'YScale', 'log', 'YTickLabelMode', 'auto');
 hold off;
 
-savefig(sprintf('coh_plot_new_NL1=%d,e=%.2f,g=1.0000,ham_type=%d.fig',NL1,e,ham_type))
+savefig(sprintf('coh_plot_new_NL1=%d,e=%.2f,g=%.4f,ham_type=%d.fig',NL1,e,g,ham_type))

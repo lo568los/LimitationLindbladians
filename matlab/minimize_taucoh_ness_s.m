@@ -135,7 +135,7 @@ for e1 = 1:length(e_list)
                 %xlswrite("gamma_matrix.xlx",gamma_matrix_approx); % can be used to
                 %conveniently print out the matrix ..
             end
-            save(sprintf("./data_plotting_vss/coh_data_NL1=%d,e=%.2f,beta_r=%.1f,g=0.0100,ham_type=%d.mat",NL1,e,betar_list(index1),ham_type))
+            save(sprintf("./data_plotting_vss/coh_data_new_NL1=%d,e=%.2f,beta_r=%.1f,g=0.0100,ham_type=%d.mat",NL1,e,betar_list(index1),ham_type))
         end
     end
 end
