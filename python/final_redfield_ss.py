@@ -162,7 +162,7 @@ eigenenergies, eigenstates = H_S.eigenstates()
 number = len(eigenenergies) # should be 2^N
 
 
-print("s = ", s)
+print("s = ", s, "NL = ",NL1)
 
 integral11=np.empty((number,number),dtype=np.cdouble) #stores J * N integral for left bath
 integral12=np.empty((number,number),dtype=np.cdouble) # stores J integral (just to check) for the left bath
@@ -212,7 +212,7 @@ for i in range(number):
                     constant22[i,k]=(integral22[i,k]+integral21[i,k])+(0.5*(spectral_bath(eigenenergies[k]-eigenenergies[i],s,tb,gamma2)+func1(eigenenergies[k]-eigenenergies[i],s,tb,beta1,mu1,gamma2)) )   #full coefficient created this is nbar+1
                     constant21[i,k]=integral21[i,k]+0.5*func1(eigenenergies[k]-eigenenergies[i],s,tb,beta1,mu1,gamma2)
 
-l2_red = optimized_L2_red(eigenstates, constant11,constant12, constant21, constant22, create_sm_list_left, create_sm_list_right, dims)
+l2_red = epsilon**2*optimized_L2_red(eigenstates, constant11,constant12, constant21, constant22, create_sm_list_left, create_sm_list_right, dims)
 
 l0 = liouvillian(H_S)
 l_total = l0 + l2_red
