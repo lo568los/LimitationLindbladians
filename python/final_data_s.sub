@@ -28,7 +28,7 @@
 beta_r=10.0
 s1=3.00
 beta_l=1.0
-e1=0.01
+e1=0.00
 
 date
 source /share/anaconda3/bin/activate

@@ -122,7 +122,7 @@ def optimized_L2_red(eigstates, C1, C2, D1, D2, create_sm_list_left, create_sm_l
 
 
 
-NL1 = 2
+NL1 = 1
 NL = NL1
 NR = NL1
 NM = 2
