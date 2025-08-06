@@ -118,7 +118,7 @@ def optimized_L2_red(eigstates, C1, C2, D1, D2, create_sm_list_left, create_sm_l
     return superop_total
 
 
-matlab_data_g = scipy.io.loadmat(f'../matlab/data_plotting_vss/coh_data_new2_NL1={NL1},e={e:.2f},beta_r={beta_r:.1f},g={g:.4f},ham_type=1.mat',mat_dtype=False)
+#matlab_data_g = scipy.io.loadmat(f'../matlab/data_plotting_vss/coh_data_new2_NL1={NL1},e={e:.2f},beta_r={beta_r:.1f},g={g:.4f},ham_type=1.mat',mat_dtype=False)
 
 
 
