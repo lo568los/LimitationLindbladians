@@ -212,12 +212,12 @@ for i in range(number):
                     constant22[i,k]=(integral22[i,k]+integral21[i,k])+(0.5*(spectral_bath(eigenenergies[k]-eigenenergies[i],s,tb,gamma2)+func1(eigenenergies[k]-eigenenergies[i],s,tb,beta1,mu1,gamma2)) )   #full coefficient created this is nbar+1
                     constant21[i,k]=integral21[i,k]+0.5*func1(eigenenergies[k]-eigenenergies[i],s,tb,beta1,mu1,gamma2)
 
-l2_red = epsilon**2*optimized_L2_red(eigenstates, constant11,constant12, constant21, constant22, create_sm_list_left, create_sm_list_right, dims)
+l2_red = optimized_L2_red(eigenstates, constant11,constant12, constant21, constant22, create_sm_list_left, create_sm_list_right, dims)
 
 l0 = liouvillian(H_S)
-l_total = l0 + l2_red
+l_total = l0 + epsilon**2*l2_red
 
 rho_red = steadystate(l_total)
 np.savetxt(f"rho_red_s={s:.2f}_NL1={NL1}_e={e:.2f}_beta_r={beta_r:.1f}_g={g:.4f}.txt", rho_red.full())
 
-print("Smallest eigenvalues of L2 are ", l_total.eigenenergies()[-3:])
+print("Smallest eigenvalues of L2 are ", l2_red.eigenenergies()[-3:])
