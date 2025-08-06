@@ -7,7 +7,7 @@ do
         for beta_l in 1.0
         do
             
-            for e1 in 0.00 0.01
+            for e1 in 0.00 
             do
 
                     sed -i "s/beta_r=.*/beta_r=${beta_r}/g" final_data_s.sub

@@ -4,9 +4,13 @@
 s_list = [0.75,1.00,1.25,1.50,1.75,2.00,2.25,2.50,2.75,3.00];
 %g_list2 = [0.010,0.019,0.035,0.066,0.123,0.231,0.433,1.52,2.84803587,5.33669923,10.000];
 betar_list = [0.5,1.0,5.0,10.0];
-e_list = [0.00,0.01];
+e_list = [0.00];
 h_list = [1];
 optimal_value = [];
+gamma_left = {};
+gamma_right = {};
+ls_left = {};
+ls_right = {};
 %load(sprintf("./data_plotting_vsbeta_4/ness_data_NL1=1,NL2=1,NM=2,e=0,beta_r=1,g=0.0016_1.mat"))
 %for index = 1:length(beta_list2)
 %ham_type=1;
@@ -98,6 +102,10 @@ for e1 = 1:length(e_list)
             
                 solution = minimize_tauopt_function2(NL1,NL2,NM,H_S,dm_ness,L2_red);
                 optimal_value(index2) = solution.optimal_val;
+                gamma_left{index2} = solution.gamma_matrix1;
+                gamma_right{index2} = solution.gamma_matrix2;
+                ls_left{index2} = solution.H_LS1;
+                ls_right{index2} = solution.H_LS2;
                 disp(solution.cvx_status);
                 
                 %rho_th = dm_ness;  %setting our non-eq setup rho_th
@@ -135,7 +143,7 @@ for e1 = 1:length(e_list)
                 %xlswrite("gamma_matrix.xlx",gamma_matrix_approx); % can be used to
                 %conveniently print out the matrix ..
             end
-            save(sprintf("./data_plotting_vss/coh_data_new_NL1=%d,e=%.2f,beta_r=%.1f,g=0.0100,ham_type=%d.mat",NL1,e,betar_list(index1),ham_type))
+            save(sprintf("./data_plotting_vss/coh_data_new2_NL1=%d,e=%.2f,beta_r=%.1f,g=0.0100,ham_type=%d.mat",NL1,e,betar_list(index1),ham_type))
         end
     end
 end
