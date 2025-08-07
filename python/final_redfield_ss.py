@@ -95,7 +95,7 @@ def optimized_L2_red(eigstates, C1, C2, D1, D2, create_sm_list_left, create_sm_l
     N = len(eigstates)
 
     # Combine all operator lists for easier looping
-    all_op_lists = [(create_sm_list_left, C1, C2), (create_sm_list_right, D1, D2)]
+    all_op_lists = [(create_sm_list_left, C1, D1), (create_sm_list_right, C2, D2)]
 
     # Loop through all eigenstates for the alpha and gamma indices
     for alpha in range(N):
@@ -107,8 +107,8 @@ def optimized_L2_red(eigstates, C1, C2, D1, D2, create_sm_list_left, create_sm_l
             for op_list, C_matrix, D_matrix in all_op_lists:
                 for op in op_list:
                     # Terms corresponding to C and C*
-                    term1 = spre(E_alpha * op * E_gamma) * spost(op.dag()) * C_matrix[alpha, gamma]
-                    term2 = spre(op.dag()) * spost(E_alpha * op * E_gamma) * D_matrix[alpha, gamma]
+                    term1 = (spre(op.dag())*spost(E_alpha * op * E_gamma) - spost(E_alpha * op * E_gamma * op.dag())) * C_matrix[alpha, gamma] #since keeping epsilon^2 positive
+                    term2 = (spre(E_alpha * op * E_gamma) * spost(op.dag()) - spre(op.dag()*E_alpha * op * E_gamma)) * D_matrix[alpha, gamma]
                     
                     # Add terms and their Hermitian conjugates
                     superop_total += term1 + term1.dag() + term2 + term2.dag()
