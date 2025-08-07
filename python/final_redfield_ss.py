@@ -150,12 +150,64 @@ for i in range(number):
                     constant22[i,k]=(integral22[i,k]+integral21[i,k])+(0.5*(spectral_bath(eigenenergies[k]-eigenenergies[i],s,tb,gamma2)+func1(eigenenergies[k]-eigenenergies[i],s,tb,beta1,mu1,gamma2)))/(np.abs(freq)**(s-1))   #full coefficient created this is nbar+1
                     constant21[i,k]=integral21[i,k]+0.5*func1(eigenenergies[k]-eigenenergies[i],s,tb,beta1,mu1,gamma2)/(np.abs(freq)**(s-1))
 
-l2_red = optimized_L2_red(eigenstates, constant11,constant12, constant21, constant22, create_sm_list_left, create_sm_list_right, dims)
+"""l2_red = optimized_L2_red(eigenstates, constant11,constant12, constant21, constant22, create_sm_list_left, create_sm_list_right, dims)
 
 l0 = liouvillian(H_S)
 l_total = l0 + epsilon**2*l2_red
 
 rho_red = steadystate(l_total)
-np.savetxt(f"rho_red_s={s:.2f}_NL1={NL1}_e={e:.2f}_beta_r={beta_r:.1f}_g={g:.4f}.txt", rho_red.full())
+c_1 = create_sm(N,1)
+c_N = create_sm(N,N)
 
-print("Smallest eigenvalues of Ltotal are ", l_total.eigenenergies()[-3:])
+"""
+
+
+pre=-1.0j*H_S
+post=1.0j*H_S
+
+L=spre(pre)+spost(post)
+
+for i in range(number):
+    for k in range(number):
+        vi=eigstates[i]
+        vk=eigstates[k]
+
+        print(constant11[i,k],constant12[i,k])
+        for c_1 in create_sm_list_left:
+        
+            op1=epsilon*epsilon*constant11[i,k]*vi*vi.dag()*c_1*vk*vk.dag()*c_1.dag()
+            op2=epsilon*epsilon*constant12[i,k]*c_1.dag()*vi*vi.dag()*c_1*vk*vk.dag()
+            
+            op3=epsilon*epsilon*constant11[i,k]*c_1.dag()
+            op4=vi*vi.dag()*c_1*vk*vk.dag()
+            op5=epsilon*epsilon*constant12[i,k]*c_1.dag()
+            
+            
+            L=L+spre(-op2-op1.dag())+spost(-op1-op2.dag())
+            L=L+spre(op3)*spost(op4)+spre(op4)*spost(op5)+spre(op4.dag())*spost(op3.dag()) +spre(op5.dag())*spost(op4.dag())
+
+        for c_N in create_sm_list_right:
+        
+            op1=epsilon*epsilon*constant21[i,k]*vi*vi.dag()*c_N*vk*vk.dag()*c_N.dag()
+            op2=epsilon*epsilon*constant22[i,k]*c_N.dag()*vi*vi.dag()*c_N*vk*vk.dag()
+            
+            op3=epsilon*epsilon*constant21[i,k]*c_N.dag()
+            op4=vi*vi.dag()*c_N*vk*vk.dag()
+            op5=epsilon*epsilon*constant22[i,k]*c_N.dag()
+            
+            
+            L=L+spre(-op2-op1.dag())+spost(-op1-op2.dag())
+            L=L+spre(op3)*spost(op4)+spre(op4)*spost(op5)+spre(op4.dag())*spost(op3.dag()) +spre(op5.dag())*spost(op4.dag())
+        
+        
+        
+#Variables needed for for iterative-lgmres to work. 
+return_info=True
+#print('Redfield Liouvillian constructed, Computing steady-state ...')
+ss_redfield = steadystate(L,return_info=return_info)
+L_eigen = L.eigenenergies()
+print("Smallest eigenvalues of L_red are ", L_eigen[-3:])
+#list_red.append(ss_redfield)
+np.savetxt(f"rho_red_s={s:.2f}_NL1={NL1}_e={e:.2f}_beta_r={beta_r:.1f}_g={g:.4f}.txt", ss_redfield.full())
+
+#print("Smallest eigenvalues of Ltotal are ", l_total.eigenenergies()[-3:])
