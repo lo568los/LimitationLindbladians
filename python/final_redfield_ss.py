@@ -169,8 +169,8 @@ L=spre(pre)+spost(post)
 
 for i in range(number):
     for k in range(number):
-        vi=eigstates[i]
-        vk=eigstates[k]
+        vi=eigenstates[i]
+        vk=eigenstates[k]
 
         print(constant11[i,k],constant12[i,k])
         for c_1 in create_sm_list_left:
