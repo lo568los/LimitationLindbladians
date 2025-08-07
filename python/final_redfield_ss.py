@@ -206,11 +206,11 @@ for i in range(number):
         for k in range(number):
                 freq = eigenenergies[k]-eigenenergies[i]
                 if np.abs(freq) >= 1/10**10:
-                    constant12[i,k]=(integral12[i,k]+integral11[i,k])/(np.abs(freq)**(s-1))+(0.5*(spectral_bath(eigenenergies[k]-eigenenergies[i],s,tb,gamma1))+func1(eigenenergies[k]-eigenenergies[i],s,tb,beta2,mu2,gamma1))   #full coefficient created this is nbar+1
-                    constant11[i,k]=integral11[i,k]/(np.abs(freq)**(s-1))+(0.5*func1(eigenenergies[k]-eigenenergies[i],s,tb,beta2,mu2,gamma1))                                   # the full coefficient is created
+                    constant12[i,k]=(integral12[i,k]+integral11[i,k])+(0.5*(spectral_bath(eigenenergies[k]-eigenenergies[i],s,tb,gamma1))+func1(eigenenergies[k]-eigenenergies[i],s,tb,beta2,mu2,gamma1))/(np.abs(freq)**(s-1))  #full coefficient created this is nbar+1
+                    constant11[i,k]=integral11[i,k]+(0.5*func1(eigenenergies[k]-eigenenergies[i],s,tb,beta2,mu2,gamma1))/(np.abs(freq)**(s-1))                                  # the full coefficient is created
                     
-                    constant22[i,k]=(integral22[i,k]+integral21[i,k])/(np.abs(freq)**(s-1))+(0.5*(spectral_bath(eigenenergies[k]-eigenenergies[i],s,tb,gamma2)+func1(eigenenergies[k]-eigenenergies[i],s,tb,beta1,mu1,gamma2)) )   #full coefficient created this is nbar+1
-                    constant21[i,k]=integral21[i,k]/(np.abs(freq)**(s-1))+0.5*func1(eigenenergies[k]-eigenenergies[i],s,tb,beta1,mu1,gamma2)
+                    constant22[i,k]=(integral22[i,k]+integral21[i,k])+(0.5*(spectral_bath(eigenenergies[k]-eigenenergies[i],s,tb,gamma2)+func1(eigenenergies[k]-eigenenergies[i],s,tb,beta1,mu1,gamma2)))/(np.abs(freq)**(s-1))   #full coefficient created this is nbar+1
+                    constant21[i,k]=integral21[i,k]+0.5*func1(eigenenergies[k]-eigenenergies[i],s,tb,beta1,mu1,gamma2)/(np.abs(freq)**(s-1))
 
 l2_red = optimized_L2_red(eigenstates, constant11,constant12, constant21, constant22, create_sm_list_left, create_sm_list_right, dims)
 
