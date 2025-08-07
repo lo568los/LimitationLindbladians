@@ -172,7 +172,7 @@ for i in range(number):
         vi=eigenstates[i]
         vk=eigenstates[k]
 
-        print(constant11[i,k],constant12[i,k])
+        #print(constant11[i,k],constant12[i,k])
         for c_1 in create_sm_list_left:
         
             op1=epsilon*epsilon*constant11[i,k]*vi*vi.dag()*c_1*vk*vk.dag()*c_1.dag()
@@ -204,10 +204,10 @@ for i in range(number):
 #Variables needed for for iterative-lgmres to work. 
 return_info=True
 #print('Redfield Liouvillian constructed, Computing steady-state ...')
-ss_redfield = steadystate(L,return_info=return_info)
+rho_redfield = steadystate(L,return_info=return_info)
 L_eigen = L.eigenenergies()
 print("Smallest eigenvalues of L_red are ", L_eigen[-3:])
 #list_red.append(ss_redfield)
-np.savetxt(f"rho_red_s={s:.2f}_NL1={NL1}_e={e:.2f}_beta_r={beta_r:.1f}_g={g:.4f}.txt", ss_redfield.full())
+np.savetxt(f"rho_red_s={s:.2f}_NL1={NL1}_e={e:.2f}_beta_r={beta_r:.1f}_g={g:.4f}.txt", rho_redfield)
 
 #print("Smallest eigenvalues of Ltotal are ", l_total.eigenenergies()[-3:])
