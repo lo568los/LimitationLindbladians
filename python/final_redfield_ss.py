@@ -77,7 +77,7 @@ def L2_red(eigstates,number, constant11,constant12,constant21,constant22,dims):
 
     return L2_superop
 
-def optimized_L2_red(eigstates, C1, C2, D1, D2, create_sm_list_left, create_sm_list_right, dims):
+def optimized_L2_red(eigstates, C1, D1, C2, D2, create_sm_list_left, create_sm_list_right, dims):
     """
     Optimized function to construct the L2_red superoperator, corrected for summation over all operators.
     
@@ -104,7 +104,7 @@ def optimized_L2_red(eigstates, C1, C2, D1, D2, create_sm_list_left, create_sm_l
             E_gamma = eigstates[gamma] * eigstates[gamma].dag()
             
             # Loop through both the left and right operator sets
-            for op_list, C_matrix, D_matrix in all_op_lists:
+            for op_list, C_matrix, D_matrix in all_op_lists:  #left or right baths
                 for op in op_list:
                     # Terms corresponding to C and C*
                     term1 = (spre(op.dag())*spost(E_alpha * op * E_gamma) - spost(E_alpha * op * E_gamma * op.dag())) * C_matrix[alpha, gamma] #since keeping epsilon^2 positive
