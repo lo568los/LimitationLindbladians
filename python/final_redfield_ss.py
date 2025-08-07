@@ -207,7 +207,9 @@ return_info=True
 rho_redfield = steadystate(L,return_info=return_info)
 L_eigen = L.eigenenergies()
 print("Smallest eigenvalues of L_red are ", L_eigen[-3:])
+
+#print(rho_redfield)
 #list_red.append(ss_redfield)
-np.savetxt(f"rho_red_s={s:.2f}_NL1={NL1}_e={e:.2f}_beta_r={beta_r:.1f}_g={g:.4f}.txt", rho_redfield)
+np.savetxt(f"rho_red_s={s:.2f}_NL1={NL1}_e={e:.2f}_beta_r={beta_r:.1f}_g={g:.4f}.txt", rho_redfield.data.to_array())
 
 #print("Smallest eigenvalues of Ltotal are ", l_total.eigenenergies()[-3:])
