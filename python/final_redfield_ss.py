@@ -14,68 +14,6 @@ e = float(sys.argv[4])
 ham_type = 1
 g = 0.01
 
-def integral1(i,k,s,tb,beta,mu,gamma,eigenenergies,limit_value = 700,b=50):
-    freq=eigenenergies[k]-eigenenergies[i]
-    if( np.absolute(freq) >= 1/10**10):
-        integral = (-1.0j/(2*np.pi))*integrate.quad(func1/freq,0,b,args=(s,tb,beta,mu,gamma),limit=limit_value,weight='cauchy',wvar=eigenenergies[k]-eigenenergies[i])[0]
-    else:
-        integral = (-1.0j/(2*np.pi))*integrate.quad(func2,0,b,args=(s,tb,beta,mu,gamma),limit=limit_value)[0]
-    return integral
-
-def integral2(i,k,s,tb,gamma,eigenenergies,limit_value = 700,b=50):
-    freq=eigenenergies[k]-eigenenergies[i]
-    if( np.absolute(freq) >= 1/10**10):
-        integral = (-1.0j/(2*np.pi))*integrate.quad(spectral_bath,0,b,args=(s,tb,gamma),limit=limit_value,weight='cauchy',wvar=eigenenergies[k]-eigenenergies[i])[0]
-    else:
-        integral = (-1.0j/(2*np.pi))*integrate.quad(spectral_bath_2,0,b,args=(s,tb,gamma),limit=limit_value)[0]
-    return integral
-
-def C(i,k,s,tb,beta,mu,gamma,eigenenergies):
-    val = integral1(i,k,s,tb,beta,mu,gamma,eigenenergies) + 0.5*(func1(eigenenergies[k]-eigenenergies[i],s,tb,beta,mu,gamma))
-
-    return val
-
-def D(i,k,s,tb,beta,mu,gamma,eigenenergies):
-    val = integral1(i,k,s,tb,beta,mu,gamma,eigenenergies) + integral2(i,k,s,tb,gamma,eigenenergies) + 0.5*(spectral_bath(eigenenergies[k]-eigenenergies[i],s,tb,gamma)+func1(eigenenergies[k]-eigenenergies[i],s,tb,beta,mu,gamma))
-    return val
-
-def L2_red(eigstates,number, constant11,constant12,constant21,constant22,dims):
-    data = []
-    N = np.prod(dims)
-    basis_ops = [basis(N, i) * basis(N, j).dag() for i in range(N) for j in range(N)]
-    for op in basis_ops:
-        op.dims = [dims,dims]
-        sum_op = 0 * op
-        for i in range(number):
-            for k in range(number):
-                vi = eigstates[i]
-                vk = eigstates[k]
-
-                proj_i = vi * vi.dag()
-                proj_k = vk * vk.dag()
-
-                proj_i.dims = [dims, dims]
-                proj_k.dims = [dims, dims]
-
-                for l in range(len(create_sm_list_left)):
-                    create_sm_list_left[l].dims = [dims, dims]
-                    op1 = commutator(op * proj_i * create_sm_list_left[l] * proj_k, create_sm_list_left[l].dag()) * constant11[i, k]
-                    op2 = commutator(create_sm_list_left[l].dag(), proj_i * create_sm_list_left[l] * proj_k * op) * constant12[i, k]
-                    sum_op += op1 + op1.dag() + op2 + op2.dag()
-
-                for l in range(len(create_sm_list_right)):
-                    create_sm_list_right[l].dims = [dims, dims]
-                    op1 = commutator(op * proj_i * create_sm_list_right[l] * proj_k, create_sm_list_right[l].dag()) * constant21[i, k]
-                    op2 = commutator(create_sm_list_right[l].dag(), proj_i * create_sm_list_right[l] * proj_k * op) * constant22[i, k]
-                    sum_op += op1 + op1.dag() + op2 + op2.dag()
-
-        data.append(operator_to_vector(sum_op))
-
-    # Stack the results into a superoperator matrix
-    superop_matrix = np.hstack([col.full() for col in data]).T
-    L2_superop = Qobj(superop_matrix, dims=[dims,dims], type='super')
-
-    return L2_superop
 
 def optimized_L2_red(eigstates, C1, D1, C2, D2, create_sm_list_left, create_sm_list_right, dims):
     """
@@ -122,7 +60,7 @@ def optimized_L2_red(eigstates, C1, D1, C2, D2, create_sm_list_left, create_sm_l
 
 
 
-NL1 = 2
+NL1 = 1
 NL = NL1
 NR = NL1
 NM = 2
@@ -220,4 +158,4 @@ l_total = l0 + epsilon**2*l2_red
 rho_red = steadystate(l_total)
 np.savetxt(f"rho_red_s={s:.2f}_NL1={NL1}_e={e:.2f}_beta_r={beta_r:.1f}_g={g:.4f}.txt", rho_red.full())
 
-print("Smallest eigenvalues of L2 are ", l_total.eigenenergies()[-3:])
+print("Smallest eigenvalues of Ltotal are ", l_total.eigenenergies()[-3:])
