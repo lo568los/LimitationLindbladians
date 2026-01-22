@@ -4,7 +4,7 @@
 %betal_list = [0.100 0.15199111 0.23101297 0.35111917 0.53366992 0.81113083 1.23284674 1.87381742 2.84803587 4.32876128 6.57933225 10.000];
 %g_list2 = [0.010,0.019,0.035,0.066,0.123,0.231,0.433,1.52,2.84803587,5.33669923,10.000];
 g_list = [0.0010,0.00187382,0.00351119,0.00657933,0.01232847,0.0231013,0.04328761,0.08111308,0.15199111,0.28480359,0.53366992,1.0000];
-betar_list = [0.5,1.0,5.0,10.0];
+betar_list = [1.0];
 e_list = [0.00,0.01];
 h_list = [1,2];
 optimal_value = [];
@@ -19,13 +19,13 @@ for e1 = 1:length(e_list)
         for index1 = 1:length(betar_list)
             disp(betar_list(index1))
             for index2 = 1:length(g_list)
-                load(sprintf("ness_data_NL1=2,NL2=2,NM=2,e=%.2f,beta_r=%.1f,beta_l=1.0,g=%.4f_%d.mat",e,betar_list(index1),g_list(index2),ham_type))
+                load(sprintf("ness_data_neqall_NL1=3,NL2=0,NM=0,e=%.2f,beta_r=%.1f,beta_l=1.0,g=%.4f_%d.mat",e,betar_list(index1),g_list(index2),ham_type))
             
             %decide paramteres.
             
-                NL1 = 2; % has to be atleast 1
-                NL2 = 2;
-                NM = 2; % has to be atleast 1
+                NL1 = 3; % has to be atleast 1
+                NL2 = 0;
+                NM = 0; % has to be atleast 1
                 N = NL1+NL2+NM;
                 
                 dL1 = 2^NL1;
@@ -63,36 +63,37 @@ for e1 = 1:length(e_list)
                 V = V_unsorted(:,ind);
                 
                 F1 = generate_orthonormal_basis(NL1);
-                F2 = generate_orthonormal_basis(NL2);
+                %F2 = generate_orthonormal_basis(NL2);
                 
                 if (basis_is_orthonormal(F1) == false)
                     warning('Basis NOT orthonormal. Something wrong \n');
                 end
                 
-                if (basis_is_orthonormal(F2) == false)
-                    warning('Basis NOT orthonormal. Something wrong \n');
-                end
+                
+                %if (basis_is_orthonormal(F2) == false)
+                %    warning('Basis NOT orthonormal. Something wrong \n');
+                %end
                 
                 
                 length_F1 = length(F1); % should be DL^2-1
-                length_F2 = length(F2);
+                %length_F2 = length(F2);
                 
                 for index = 1:length_F1
                     F1{index} = kron(F1{index},eye(dM*dL2)/sqrt(dM*dL2));
                 end
                 
-                for index = 1:length_F2
-                    F2{index} = kron(eye(dM*dL1)/sqrt(dM*dL1), F2{index});
-                end
+                %for index = 1:length_F2
+                %    F2{index} = kron(eye(dM*dL1)/sqrt(dM*dL1), F2{index});
+                %end
                 
                 
                 if (basis_is_orthonormal(F1) == false)
                     warning('Basis NOT orthonormal. Something wrong here! \n');
                 end
                 
-                if (basis_is_orthonormal(F2) == false)
-                    warning('Basis NOT orthonormal. Something wrong here! \n');
-                end
+                %if (basis_is_orthonormal(F2) == false)
+                %    warning('Basis NOT orthonormal. Something wrong here! \n');
+                %end
                 
                 
                 %% Starting the SDP.
@@ -136,7 +137,7 @@ for e1 = 1:length(e_list)
                 %xlswrite("gamma_matrix.xlx",gamma_matrix_approx); % can be used to
                 %conveniently print out the matrix ..
             end
-            save(sprintf("./data_plotting_vsg_3/diag_data_NL1=%d,e=%.2f,beta_r=%.1f,beta_l=1.0,ham_type=%d.mat",NL1,e,betar_list(index1),ham_type))
+            save(sprintf("./data_plotting_vsg_3/diag_data_NL1=%d,NM=0,e=%.2f,beta_r=%.1f,beta_l=1.0,ham_type=%d.mat",NL1,e,betar_list(index1),ham_type))
         end
     end
 end

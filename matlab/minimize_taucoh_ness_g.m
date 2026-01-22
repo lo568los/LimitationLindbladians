@@ -19,7 +19,7 @@ for e1 = 1:length(e_list)
         for index1 = 1:length(betar_list)
             disp(betar_list(index1))
             for index2 = 1:length(g_list)
-                load(sprintf("./Other_coh_data/coh_data_NL = 3,NM = 1_g%d.mat",index2))
+                load(sprintf("ness_data_neqall_NL1=3,NL2=0,NM=0,e=%.2f,beta_r=%.1f,beta_l=1.0,g=%.4f_%d.mat",e,betar_list(index1),g_list(index2),ham_type))
 
                 %ness_data_NL1=2,NL2=2,NM=2,e=%.2f,beta_r=%.1f,beta_l=1.0,g=%.4f_%d.mat
                 
@@ -28,7 +28,7 @@ for e1 = 1:length(e_list)
             
                 NL1 = 3; % has to be atleast 1
                 NL2 = 0;
-                NM = 1; % has to be atleast 1
+                NM = 0; % has to be atleast 1
                 N = NL1+NL2+NM;
                 
                 dL1 = 2^NL1;
@@ -38,11 +38,11 @@ for e1 = 1:length(e_list)
                 
                 
                 g = g_list(index2);
-                w0list = zeros(N,1) + 1;
-                glist = zeros(N-1,1)+ g;
-                w0list(4) = 1 + e;
-                w0list(5) = 1 + e;
-                w0list(6) = 1 + e;
+                w0list = zeros(N,1) + 2;
+                glist = zeros(N-1,1)- g;
+                w0list(4) = 2 + 2*e;
+                w0list(5) = 2 + 2*e;
+                w0list(6) = 2 + 2*e;
                 if ham_type == 1
                     deltalist = zeros(N-1,1) + 1;
                 end
@@ -65,37 +65,37 @@ for e1 = 1:length(e_list)
                 [temp,ind] = sort(diag(D_unsorted));
                 V = V_unsorted(:,ind);
                 
-                F1 = generate_orthonormal_basis(NL1);
-                F2 = generate_orthonormal_basis(NL2);
+                %F1 = generate_orthonormal_basis(NL1);
+                %F2 = generate_orthonormal_basis(NL2);
                 
-                if (basis_is_orthonormal(F1) == false)
-                    warning('Basis NOT orthonormal. Something wrong \n');
-                end
+                %if (basis_is_orthonormal(F1) == false)
+                %    warning('Basis NOT orthonormal. Something wrong \n');
+                %end
                 
-                if (basis_is_orthonormal(F2) == false)
-                    warning('Basis NOT orthonormal. Something wrong \n');
-                end
-                
-                
-                length_F1 = length(F1); % should be DL^2-1
-                length_F2 = length(F2);
-                
-                for index = 1:length_F1
-                    F1{index} = kron(F1{index},eye(dM*dL2)/sqrt(dM*dL2));
-                end
-                
-                for index = 1:length_F2
-                    F2{index} = kron(eye(dM*dL1)/sqrt(dM*dL1), F2{index});
-                end
+                %if (basis_is_orthonormal(F2) == false)
+                %    warning('Basis NOT orthonormal. Something wrong \n');
+                %end
                 
                 
-                if (basis_is_orthonormal(F1) == false)
-                    warning('Basis NOT orthonormal. Something wrong here! \n');
-                end
+                %length_F1 = length(F1); % should be DL^2-1
+                %length_F2 = length(F2);
                 
-                if (basis_is_orthonormal(F2) == false)
-                    warning('Basis NOT orthonormal. Something wrong here! \n');
-                end
+                %for index = 1:length_F1
+                %    F1{index} = kron(F1{index},eye(dM*dL2)/sqrt(dM*dL2));
+                %end
+                
+                %for index = 1:length_F2
+                %    F2{index} = kron(eye(dM*dL1)/sqrt(dM*dL1), F2{index});
+                %end
+                
+                
+                %if (basis_is_orthonormal(F1) == false)
+                %    warning('Basis NOT orthonormal. Something wrong here! \n');
+                %end
+                
+                %if (basis_is_orthonormal(F2) == false)
+                %    warning('Basis NOT orthonormal. Something wrong here! \n');
+                %end
                 
                 
                 %% Starting the SDP.
