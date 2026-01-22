@@ -28,7 +28,11 @@
 beta_r=10.0
 ham_type=1
 beta_l=10.000
+<<<<<<< HEAD
 g1=0.1
+=======
+g1=0.01
+>>>>>>> dc4ab7c1c88ef3105bf073e8b8a47479403c513f
 e1=0.01
 
 date
