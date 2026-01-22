@@ -4,7 +4,7 @@
 #SBATCH --job-name=test-g
 #
 # Set partition [change]
-#SBATCH --partition=short
+#SBATCH --partition=serial-short
 #
 # STDOUT file; "N" is node number and "j" job id number
 #SBATCH --output=test-serial_%N_%j.out
