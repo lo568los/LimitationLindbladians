@@ -202,9 +202,28 @@ def spectral_bath_2(omega,s,tb,gamma=1):
 
 
 def nbar(omega,beta,mu):
-    if beta*(omega-mu) < 10**(-14):
-        return 1/(beta*(omega-mu))
-    return 1/(np.exp(beta*(omega-mu))-1)
+    x = beta * (omega - mu)
+    
+    # Use absolute value to check for smallness. 
+    # 1e-6 is usually sufficient for switching to Taylor expansion.
+    if np.abs(x) < 1e-6:
+        # Handle the exact singularity to prevent ZeroDivisionError
+        if x == 0:
+            # Return a large finite number (cutoff) representing divergence
+            # Adjust this magnitude based on your physics needs/units
+            return 1e15 
+        
+        # Taylor expansion of 1/(exp(x)-1) around 0:
+        # 1/x - 1/2 + x/12 ...
+        # Adding the -0.5 term ensures better continuity at the switch point
+        return (1.0 / x) - 0.5
+
+    # Standard calculation for values away from singularity
+    try:
+        return 1.0 / (np.exp(x) - 1)
+    except OverflowError:
+        # If exp(x) overflows (very large x), the occupation is effectively 0
+        return 0.0
 
 
 def func1(omega,s,tb,beta,mu,gamma=1):
