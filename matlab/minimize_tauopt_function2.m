@@ -18,42 +18,44 @@ function [output] = minimize_tauopt_function2(NL1,NL2,NM,H_S,dm_ness1,L2_red1)
     V = V_unsorted(:,ind);
     
     F1 = generate_orthonormal_basis(NL1);
-    %F2 = generate_orthonormal_basis(NL2);
+    F2 = generate_orthonormal_basis(NL2);
     
     if (basis_is_orthonormal(F1) == false)
         warning('Basis NOT orthonormal. Something wrong \n');
     end
     
-    %if (basis_is_orthonormal(F2) == false)
-    %    warning('Basis NOT orthonormal. Something wrong \n');
-    %end
+    if (basis_is_orthonormal(F2) == false)
+        warning('Basis NOT orthonormal. Something wrong \n');
+    end
     
     
     length_F1 = length(F1); % should be DL^2-1
     
-    %length_F2 = length(F2);
+    length_F2 = length(F2);
     
     for index = 1:length_F1
         F1{index} = kron(F1{index},eye(dM*dL2)/sqrt(dM*dL2));
     end
     
-    %for index = 1:length_F2
-    %    F2{index} = kron(eye(dM*dL1)/sqrt(dM*dL1), F2{index});
-    %end
+    for index = 1:length_F2
+        F2{index} = kron(eye(dM*dL1)/sqrt(dM*dL1), F2{index});
+    end
     
     
     if (basis_is_orthonormal(F1) == false)
         warning('Basis NOT orthonormal. Something wrong here! \n');
     end
     
-    %if (basis_is_orthonormal(F2) == false)
-    %    warning('Basis NOT orthonormal. Something wrong here! \n');
-    %end
+    if (basis_is_orthonormal(F2) == false)
+        warning('Basis NOT orthonormal. Something wrong here! \n');
+    end
     
     
     %% Starting the SDP.
     
     rho_th = dm_ness1;  %setting our non-eq setup rho_th
+    output = struct(); % Pre-initialize output
+    
     
     cvx_begin sdp 
         cvx_precision high %set CVX precision
@@ -72,21 +74,21 @@ function [output] = minimize_tauopt_function2(NL1,NL2,NM,H_S,dm_ness1,L2_red1)
     
         subject to %constraints..
             trace(gamma_matrix1) == 1;
-            %trace(gamma_matrix2) == 1;
+            trace(gamma_matrix2) == 1;
             
     cvx_end
+        
     
-
     %Store all relevant info in output..
     output.optimal_val = cvx_optval; %stores tau_opt
     output.gamma_matrix1 = gamma_matrix1; 
-    %output.gamma_matrix2 = gamma_matrix2;
+    output.gamma_matrix2 = gamma_matrix2;
     %output.diag_values = diag_values;
     output.H_LS1 = H_LS1;
-    %output.H_LS2 = H_LS2;
+    output.H_LS2 = H_LS2;
     output.cvx_status = cvx_status;
     %output.F = F;
-
+   
     return
 end
 
