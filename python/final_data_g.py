@@ -11,8 +11,8 @@ ham_type = int(sys.argv[3])
 beta_l = float(sys.argv[4])
 e = float(sys.argv[5])
 
-NL1 = 3
-NL2 = 0
+NL1 = 1
+NL2 = 2
 NM = 0
 
 N = NL1 + NL2 + NM
@@ -102,7 +102,7 @@ def re_ness_g(beta_r,beta_l,g,ham_type,e):
 
     s = 1
 
-    gamma_list = [1,1.5, 2]  #for 3 sites
+    gamma_list = [1,1,1]  #for 3 sites
 
 
   
