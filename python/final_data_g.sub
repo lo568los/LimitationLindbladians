@@ -25,7 +25,7 @@
 ##SBATCH --mail-type=ALL
 #
 
-beta_r=10.0
+beta_r=1.0
 ham_type=2
 beta_l=1.0
 g1=1.0000
