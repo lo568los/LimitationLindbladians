@@ -136,16 +136,16 @@ def re_ness_g(beta_r,beta_l,g,ham_type,e):
                     #print(f"Absolute frequency  for i = {i}, k = {k} is ",np.absolute(freq))
                     #print(i,k,freq)
                     if( np.absolute(freq) >= 1/10**10):
-                        integral11[i,k]=(-1.0j/(2*np.pi))*integrate.quad(func1,0,b_val,args=(tb,beta2,mu2,gamma1),limit=limit_value,weight='cauchy',wvar=eigenergies[k]-eigenergies[i])[0] #func 1
-                        integral12[i,k]=(-1.0j/(2*np.pi))*integrate.quad(spectral_bath,0,b_val,args=(tb,gamma1),limit=limit_value,weight='cauchy',wvar=eigenergies[k]-eigenergies[i])[0]  #left bath done
-                        integral21[i,k]=(-1.0j/(2*np.pi))*integrate.quad(func1,0,b_val,args=(tb,beta1,mu1,gamma2),limit=limit_value,weight='cauchy',wvar=eigenergies[k]-eigenergies[i])[0] #func 1
-                        integral22[i,k]=(-1.0j/(2*np.pi))*integrate.quad(spectral_bath,0,b_val,args=(tb,gamma2),limit=limit_value,weight='cauchy',wvar=eigenergies[k]-eigenergies[i])[0]  #right bath
+                        integral11[i,k]=(-1.0j/(2*np.pi))*integrate.quad(func1,0,b_val,args=(tb,beta2,mu2,gamma1),limit=limit_value,weight='cauchy',wvar=eigenergies[k]-eigenergies[i],points=[0])[0] #func 1
+                        integral12[i,k]=(-1.0j/(2*np.pi))*integrate.quad(spectral_bath,0,b_val,args=(tb,gamma1),limit=limit_value,weight='cauchy',wvar=eigenergies[k]-eigenergies[i],points=[0])[0]  #left bath done
+                        integral21[i,k]=(-1.0j/(2*np.pi))*integrate.quad(func1,0,b_val,args=(tb,beta1,mu1,gamma2),limit=limit_value,weight='cauchy',wvar=eigenergies[k]-eigenergies[i],points=[0])[0] #func 1
+                        integral22[i,k]=(-1.0j/(2*np.pi))*integrate.quad(spectral_bath,0,b_val,args=(tb,gamma2),limit=limit_value,weight='cauchy',wvar=eigenergies[k]-eigenergies[i],points=[0])[0]  #right bath
             
                     if (np.absolute(freq)<=1/10**10):  #The problem is arising here....
-                        integral11[i,k]=(-1.0j/(2*np.pi))*integrate.quad(func2,0,b_val,args=(tb,beta2,mu2,gamma1),limit=limit_value)[0]
-                        integral12[i,k]=(-1.0j/(2*np.pi))*integrate.quad(spectral_bath_2,0,b_val,args=(tb,gamma1),limit=limit_value)[0]
-                        integral21[i,k]=(-1.0j/(2*np.pi))*integrate.quad(func2,0,b_val,args=(tb,beta1,mu1,gamma2),limit=limit_value)[0]
-                        integral22[i,k]=(-1.0j/(2*np.pi))*integrate.quad(spectral_bath_2,0,b_val,args=(tb,gamma2),limit=limit_value)[0]
+                        integral11[i,k]=(-1.0j/(2*np.pi))*integrate.quad(func2,0,b_val,args=(tb,beta2,mu2,gamma1),limit=limit_value,points=[0])[0]
+                        integral12[i,k]=(-1.0j/(2*np.pi))*integrate.quad(spectral_bath_2,0,b_val,args=(tb,gamma1),limit=limit_value,points=[0])[0]
+                        integral21[i,k]=(-1.0j/(2*np.pi))*integrate.quad(func2,0,b_val,args=(tb,beta1,mu1,gamma2),limit=limit_value,points=[0])[0]
+                        integral22[i,k]=(-1.0j/(2*np.pi))*integrate.quad(spectral_bath_2,0,b_val,args=(tb,gamma2),limit=limit_value,points=[0])[0]
                     
                 
                 #expected=1.0j*(eigenergies[k]-eigenergies[i])/(2*tb*tb)
