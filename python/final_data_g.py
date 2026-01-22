@@ -102,7 +102,7 @@ def re_ness_g(beta_r,beta_l,g,ham_type,e):
 
     s = 1
 
-    gamma_list = [1,1,1.5]  #for 3 sites
+    gamma_list = [1,1.5, 2]  #for 3 sites
 
 
   
@@ -233,7 +233,7 @@ def re_ness_g(beta_r,beta_l,g,ham_type,e):
 
     data_dict = {"dm_ness":rho_comp2,"L2_red":l2_red, "beta2":beta2, "g":g, "e":e, "ham_type":ham_type}
 
-    scipy.io.savemat(f'ness_data_neqall2_NL1={NL1},NL2={NL2},NM={NM},e={e:.2f},beta_r={beta_r:.1f},beta_l={beta_l:.1f},g={g:.4f}_{ham_type}.mat',data_dict)
+    scipy.io.savemat(f'ness_data_neqall_NL1={NL1},NL2={NL2},NM={NM},e={e:.2f},beta_r={beta_r:.1f},beta_l={beta_l:.1f},g={g:.4f}_{ham_type}.mat',data_dict)
 
 re_ness_g(beta_r,beta_l,g,ham_type,e)
 
