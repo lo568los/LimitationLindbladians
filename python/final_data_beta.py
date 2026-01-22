@@ -12,9 +12,9 @@ g = float(sys.argv[4])
 e = float(sys.argv[5])
 
 
-NL1 = 1
-NL2 = 1
-NM = 2
+NL1 = 3
+NL2 = 0
+NM = 0
 
 N = NL1 + NL2 + NM
 dL1 = 2**NL1
@@ -109,6 +109,8 @@ def re_ness_beta(beta_r,beta_l,g,ham_type,e):
     epsilon = 0.01
     tb = 0.01
 
+    gamma_list = [1,1,1.5]  #for 3 sites
+
     #rho_ness_arr = []
     #l2_red_arr = []
 
@@ -188,10 +190,10 @@ def re_ness_beta(beta_r,beta_l,g,ham_type,e):
                 for l in range(NL1):
                     proj_y = eigstates[y]*eigstates[y].dag()
                     op1 = commutator(proj_k*create_sm_list_left[l]*proj_y,create_sm_list_left[l].dag())*constant11[k,y]
-                    sum1 += epsilon*epsilon*vi.dag()*(op1 + op1.dag())*vi
+                    sum1 += gamma_list[l]*epsilon*epsilon*vi.dag()*(op1 + op1.dag())*vi
 
                     op2 = commutator(create_sm_list_left[l].dag(),proj_y*create_sm_list_left[l]*proj_k)*constant12[y,k]
-                    sum1 += epsilon*epsilon*vi.dag()*(op2 + op2.dag())*vi
+                    sum1 += gamma_list[l]*epsilon*epsilon*vi.dag()*(op2 + op2.dag())*vi
 
                 for l in range(NL2):
                     proj_y = eigstates[y]*eigstates[y].dag()
