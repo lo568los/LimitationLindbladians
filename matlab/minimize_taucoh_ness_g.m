@@ -19,7 +19,7 @@ for e1 = 1:length(e_list)
         for index1 = 1:length(betar_list)
             disp(betar_list(index1))
             for index2 = 1:length(g_list)
-                load(sprintf("ness_data_neqall_NL1=3,NL2=0,NM=0,e=%.2f,beta_r=%.1f,beta_l=1.0,g=%.4f_%d.mat",e,betar_list(index1),g_list(index2),ham_type))
+                load(sprintf("ness_data_neqall2_NL1=3,NL2=0,NM=0,e=%.2f,beta_r=%.1f,beta_l=1.0,g=%.4f_%d.mat",e,betar_list(index1),g_list(index2),ham_type))
 
                 %ness_data_NL1=2,NL2=2,NM=2,e=%.2f,beta_r=%.1f,beta_l=1.0,g=%.4f_%d.mat
                 
@@ -139,7 +139,7 @@ for e1 = 1:length(e_list)
                 %xlswrite("gamma_matrix.xlx",gamma_matrix_approx); % can be used to
                 %conveniently print out the matrix ..
             end
-            save(sprintf("./data_plotting_vsg_3/coh_data_NL1=%d,NM=0,e=%.2f,beta_r=%.1f,beta_l=1.0,ham_type=%d.mat",NL1,e,betar_list(index1),ham_type))
+            save(sprintf("./data_plotting_vsg_3/coh_data2_NL1=%d,NM=0,e=%.2f,beta_r=%.1f,beta_l=1.0,ham_type=%d.mat",NL1,e,betar_list(index1),ham_type))
         end
     end
 end
