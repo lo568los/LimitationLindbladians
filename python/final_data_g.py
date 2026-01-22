@@ -100,6 +100,8 @@ def re_ness_g(beta_r,beta_l,g,ham_type,e):
     epsilon = 0.01
     tb = 0.01
 
+    s = 1
+
     gamma_list = [1,1,1]  #for 3 sites
 
 
@@ -136,16 +138,16 @@ def re_ness_g(beta_r,beta_l,g,ham_type,e):
                     #print(f"Absolute frequency  for i = {i}, k = {k} is ",np.absolute(freq))
                     #print(i,k,freq)
                     if( np.absolute(freq) >= 1/10**10):
-                        integral11[i,k]=(-1.0j/(2*np.pi))*integrate.quad(func1,0,b_val,args=(tb,beta2,mu2,gamma1),limit=limit_value,weight='cauchy',wvar=eigenergies[k]-eigenergies[i],points=[0])[0] #func 1
-                        integral12[i,k]=(-1.0j/(2*np.pi))*integrate.quad(spectral_bath,0,b_val,args=(tb,gamma1),limit=limit_value,weight='cauchy',wvar=eigenergies[k]-eigenergies[i],points=[0])[0]  #left bath done
-                        integral21[i,k]=(-1.0j/(2*np.pi))*integrate.quad(func1,0,b_val,args=(tb,beta1,mu1,gamma2),limit=limit_value,weight='cauchy',wvar=eigenergies[k]-eigenergies[i],points=[0])[0] #func 1
-                        integral22[i,k]=(-1.0j/(2*np.pi))*integrate.quad(spectral_bath,0,b_val,args=(tb,gamma2),limit=limit_value,weight='cauchy',wvar=eigenergies[k]-eigenergies[i],points=[0])[0]  #right bath
+                        integral11[i,k]=(-1.0j/(2*np.pi))*integrate.quad(func1,0,b_val,args=(s,tb,beta2,mu2,gamma1),limit=limit_value,weight='cauchy',wvar=eigenergies[k]-eigenergies[i])[0] #func 1
+                        integral12[i,k]=(-1.0j/(2*np.pi))*integrate.quad(spectral_bath,0,b_val,args=(s,tb,gamma1),limit=limit_value,weight='cauchy',wvar=eigenergies[k]-eigenergies[i])[0]  #left bath done
+                        integral21[i,k]=(-1.0j/(2*np.pi))*integrate.quad(func1,0,b_val,args=(s,tb,beta1,mu1,gamma2),limit=limit_value,weight='cauchy',wvar=eigenergies[k]-eigenergies[i])[0] #func 1
+                        integral22[i,k]=(-1.0j/(2*np.pi))*integrate.quad(spectral_bath,0,b_val,args=(s,tb,gamma2),limit=limit_value,weight='cauchy',wvar=eigenergies[k]-eigenergies[i])[0]  #right bath
             
                     if (np.absolute(freq)<=1/10**10):  #The problem is arising here....
-                        integral11[i,k]=(-1.0j/(2*np.pi))*integrate.quad(func2,0,b_val,args=(tb,beta2,mu2,gamma1),limit=limit_value,points=[0])[0]
-                        integral12[i,k]=(-1.0j/(2*np.pi))*integrate.quad(spectral_bath_2,0,b_val,args=(tb,gamma1),limit=limit_value,points=[0])[0]
-                        integral21[i,k]=(-1.0j/(2*np.pi))*integrate.quad(func2,0,b_val,args=(tb,beta1,mu1,gamma2),limit=limit_value,points=[0])[0]
-                        integral22[i,k]=(-1.0j/(2*np.pi))*integrate.quad(spectral_bath_2,0,b_val,args=(tb,gamma2),limit=limit_value,points=[0])[0]
+                        integral11[i,k]=(-1.0j/(2*np.pi))*integrate.quad(func2,0,b_val,args=(s,tb,beta2,mu2,gamma1),limit=limit_value,points=[0])[0]
+                        integral12[i,k]=(-1.0j/(2*np.pi))*integrate.quad(spectral_bath_2,0,b_val,args=(s,tb,gamma1),limit=limit_value,points=[0])[0]
+                        integral21[i,k]=(-1.0j/(2*np.pi))*integrate.quad(func2,0,b_val,args=(s,tb,beta1,mu1,gamma2),limit=limit_value,points=[0])[0]
+                        integral22[i,k]=(-1.0j/(2*np.pi))*integrate.quad(spectral_bath_2,0,b_val,args=(s,tb,gamma2),limit=limit_value,points=[0])[0]
                     
                 
                 #expected=1.0j*(eigenergies[k]-eigenergies[i])/(2*tb*tb)
@@ -164,10 +166,10 @@ def re_ness_g(beta_r,beta_l,g,ham_type,e):
     for i in range(number):
             for k in range(number):
                     constant12[i,k]=integral12[i,k]+integral11[i,k]+0.5*(spectral_bath(eigenergies[k]-eigenergies[i],tb,gamma1)+func1(eigenergies[k]-eigenergies[i],tb,beta2,mu2,gamma1))    #full coefficient created this is nbar+1
-                    constant11[i,k]=integral11[i,k]+0.5*func1(eigenergies[k]-eigenergies[i],tb,beta2,mu2,gamma1)                                       # the full coefficient is created
+                    constant11[i,k]=integral11[i,k]+0.5*func1(eigenergies[k]-eigenergies[i],s,tb,beta2,mu2,gamma1)                                       # the full coefficient is created
                     
                     constant22[i,k]=integral22[i,k]+integral21[i,k]+0.5*(spectral_bath(eigenergies[k]-eigenergies[i],tb,gamma2)+func1(eigenergies[k]-eigenergies[i],tb,beta1,mu1,gamma2))    #full coefficient created this is nbar+1
-                    constant21[i,k]=integral21[i,k]+0.5*func1(eigenergies[k]-eigenergies[i],tb,beta1,mu1,gamma2)   # the full coefficient is created
+                    constant21[i,k]=integral21[i,k]+0.5*func1(eigenergies[k]-eigenergies[i],s,tb,beta1,mu1,gamma2)   # the full coefficient is created
                     #print(i,k,constant11[i,k],constant12[i,k],constant21[i,k],constant22[i,k])
 
 
@@ -211,8 +213,8 @@ def re_ness_g(beta_r,beta_l,g,ham_type,e):
 
     x = np.linalg.solve(A_new,b)
 
-    """print("Correctness check:",np.dot(A_new,x))
-    print(np.dot(A[-1],x))"""
+    print("Correctness check:",np.dot(A_new,x))
+    print(np.dot(A[-1],x))
 
     x_real = [np.real(x[i]) for i in range(number)]
 
@@ -225,6 +227,8 @@ def re_ness_g(beta_r,beta_l,g,ham_type,e):
     rho_comp2 = np.dot(U,np.dot(rho,U.T.conjugate()))
     #rho_ness_arr.append(rho_comp2)
     l2_red = L2_red(rho_comp2,eigstates,number,constant11,constant12,constant21,constant22)
+    print("L2_red shape:", l2_red.shape)
+
     #l2_red_arr.append(L2_redfield)
 
     data_dict = {"dm_ness":rho_comp2,"L2_red":l2_red, "beta2":beta2, "g":g, "e":e, "ham_type":ham_type}

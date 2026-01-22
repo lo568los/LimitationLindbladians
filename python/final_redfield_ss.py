@@ -60,10 +60,10 @@ def optimized_L2_red(eigstates, C1, D1, C2, D2, create_sm_list_left, create_sm_l
 
 
 
-NL1 = 2
+NL1 = 3
 NL = NL1
-NR = NL1
-NM = 2
+NR = 0
+NM = 0
 N = NL + NR + NM
 dL = 2**NL
 dR = 2**NR
@@ -205,13 +205,13 @@ for i in range(number):
 return_info=True
 #print('Redfield Liouvillian constructed, Computing steady-state ...')
 rho_redfield = steadystate(L,return_info=return_info)
-print(rho_redfield)
-print(rho_redfield[0])
+#print(rho_redfield)
+#print(rho_redfield[0])
 L_eigen = L.eigenenergies()
 print("Smallest eigenvalues of L_red are ", L_eigen[-3:])
 
 #print(rho_redfield)
 #list_red.append(ss_redfield)
-np.savetxt(f"rho_red_s={s:.2f}_NL1={NL1}_e={e:.2f}_beta_r={beta_r:.1f}_g={g:.4f}.txt", rho_redfield[0].full())
+#np.savetxt(f"rho_red_s={s:.2f}_NL1={NL1}_e={e:.2f}_beta_r={beta_r:.1f}_g={g:.4f}.txt", rho_redfield[0].full())
 
 #print("Smallest eigenvalues of Ltotal are ", l_total.eigenenergies()[-3:])
